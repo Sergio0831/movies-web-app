@@ -1,0 +1,54 @@
+@use './variables' as *;
+@use './mixins' as *;
+
+.heading-l {
+  @include font(
+    $font-size: $fsz-xl,
+    $font-weight: $fw-light,
+    $line-height: $lh-base
+  );
+
+  letter-spacing: -0.5px;
+}
+
+.heading-m {
+  @include font(
+    $font-size: $fsz-l,
+    $font-weight: $fw-light,
+    $line-height: $lh-base
+  );
+}
+
+.heading-s {
+  @include font(
+    $font-size: $fsz-l,
+    $font-weight: $fw-medium,
+    $line-height: $lh-base
+  );
+}
+
+.heading-xs {
+  @include font(
+    $font-size: $fsz-m,
+    $font-weight: $fw-medium,
+    $line-height: $lh-base
+  );
+}
+
+.body-m {
+  @include font(
+    $font-size: $fsz-s,
+    $font-weight: $fw-light,
+    $line-height: $lh-base
+  );
+}
+
+.body-s {
+  @include font(
+    $font-size: $fsz-xs,
+    $font-weight: $fw-light,
+    $line-height: $lh-base
+  );
+
+  color: rgba($clr-white, 0.75);
+}
