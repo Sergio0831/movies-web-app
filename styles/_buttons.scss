@@ -1,0 +1,34 @@
+@use './variables' as *;
+@use './mixins' as *;
+
+.btn {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+.btn-block {
+  width: $width-base;
+}
+
+.btn-fill {
+  @extend .btn;
+
+  background-color: $clr-red;
+  color: $clr-white;
+  border-radius: $border-xsmall;
+  padding: $padding * 1.4 0;
+  transition: background-color $transition, color $transition;
+
+  &:hover {
+    background-color: $clr-white;
+    color: $clr-semi-dark-blue;
+  }
+}
+
+.btn-outline {
+  @extend .btn;
+
+  background-color: transparent;
+  color: $clr-red;
+}

@@ -19,7 +19,36 @@ $fw-medium: 500;
 
 $lh-base: 1.25;
 
+/** Display **/
+$d-grid: grid;
+$d-flex: flex;
+
+$center: center;
+$start: flex-start;
+$end: flex-end;
+
+$column: column;
+$row: row;
+
+/** Space **/
+$gap: 1rem;
+$margin: 1rem;
+$padding: 1rem;
+
 /** Position **/
 $p-relative: relative;
 $p-absolute: absolute;
 $p-fixed: fixed;
+
+/** Width Height **/
+$width-base: 100%;
+$height-base: 100%;
+
+/** Border Radius **/
+$border-xsmall: 0.6rem;
+$border-small: 0.8rem;
+$border-large: 2rem;
+$border-round: 50%;
+
+/** Animation **/
+$transition: 0.2s ease-in;

@@ -1,4 +1,4 @@
-@use './variables' as *;
+@use 'variables' as *;
 
 /*** Typografy ***/
 @mixin font($font-weight: null, $font-size: null, $line-height: null) {
