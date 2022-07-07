@@ -15,9 +15,10 @@
 
   label {
     margin-bottom: $margin * 2.4;
+    position: $p-relative;
   }
 
-  input {
+  .input {
     width: $width-base;
     font-family: inherit;
     border: none;
@@ -29,6 +30,10 @@
     outline: none;
     caret-color: $clr-red;
 
+    &__error {
+      border-bottom-color: $clr-red;
+    }
+
     &:focus {
       border-bottom-color: $clr-white;
     }
@@ -39,5 +44,15 @@
     column-gap: $gap;
 
     @include flex($justify-content: $center);
+  }
+
+  .error {
+    @include absolute($top: 0, $right: -9999px);
+
+    color: $clr-red;
+
+    &__show {
+      right: 1.6rem;
+    }
   }
 }
