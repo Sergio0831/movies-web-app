@@ -12,47 +12,25 @@
   h1 {
     margin-bottom: $margin * 4;
   }
+}
 
-  label {
-    margin-bottom: $margin * 2.4;
-    position: $p-relative;
+.input {
+  width: $width-base;
+  font-family: inherit;
+  border: none;
+  background-color: transparent;
+  color: $clr-white;
+  border-bottom: 1px solid $clr-greyish-blue;
+  padding: 0 $padding * 1.6 $padding * 1.8;
+  cursor: pointer;
+  outline: none;
+  caret-color: $clr-red;
+
+  &__error {
+    border-bottom-color: $clr-red;
   }
 
-  .input {
-    width: $width-base;
-    font-family: inherit;
-    border: none;
-    background-color: transparent;
-    color: $clr-white;
-    border-bottom: 1px solid $clr-greyish-blue;
-    padding: 0 $padding * 1.6 $padding * 1.8;
-    cursor: pointer;
-    outline: none;
-    caret-color: $clr-red;
-
-    &__error {
-      border-bottom-color: $clr-red;
-    }
-
-    &:focus {
-      border-bottom-color: $clr-white;
-    }
-  }
-
-  &__bottom {
-    margin-top: $margin * 2.4;
-    column-gap: $gap;
-
-    @include flex($justify-content: $center);
-  }
-
-  .error {
-    @include absolute($top: 0, $right: -9999px);
-
-    color: $clr-red;
-
-    &__show {
-      right: 1.6rem;
-    }
+  &:focus {
+    border-bottom-color: $clr-white;
   }
 }

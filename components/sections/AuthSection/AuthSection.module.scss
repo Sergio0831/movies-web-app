@@ -1,9 +1,0 @@
-@use '@/styles/variables' as *;
-@use '@/styles/mixins' as *;
-
-.section {
-  @include flex($flex-direction: $column, $align-items: $center);
-
-  padding-top: $padding * 7.8;
-  row-gap: $gap * 8;
-}
