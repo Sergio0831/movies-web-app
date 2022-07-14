@@ -1,0 +1,6 @@
+@use '@/styles/variables' as *;
+
+.label {
+  margin-bottom: $margin * 2.4;
+  position: $p-relative;
+}

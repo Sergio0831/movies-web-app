@@ -1,0 +1,9 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+
+.footer {
+  margin-top: $margin * 2.4;
+  column-gap: $gap;
+
+  @include flex($justify-content: $center);
+}

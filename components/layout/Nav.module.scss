@@ -1,0 +1,47 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+
+.nav {
+  background-color: $clr-semi-dark-blue;
+  width: 9.6rem;
+  height: 100vh;
+  border-radius: $border-large;
+  display: $d-grid;
+  justify-content: $center;
+  padding: $padding * 3.5 0;
+  margin: $margin * 3.2;
+
+  div {
+    @include flex($flex-direction: $column, $align-items: $center);
+  }
+
+  &__logo {
+    margin-bottom: $margin * 7.5;
+  }
+
+  &__links {
+    @include flex($flex-direction: $column, $align-items: $center);
+
+    row-gap: $gap * 4;
+
+    svg {
+      transition: fill $transition;
+      fill: $clr-greyish-blue;
+
+      &:hover {
+        fill: $clr-red;
+      }
+    }
+
+    &-active {
+      svg {
+        fill: $clr-white;
+      }
+    }
+  }
+
+  &__avatar {
+    align-self: $end;
+    background: transparent;
+  }
+}

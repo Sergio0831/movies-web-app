@@ -1,0 +1,14 @@
+@use '@/styles/variables' as *;
+
+.form {
+  display: $d-grid;
+  width: $width-base;
+  max-width: 40rem;
+  padding: $padding * 3.2;
+  background-color: $clr-semi-dark-blue;
+  border-radius: $border-large;
+
+  h1 {
+    margin-bottom: $margin * 4;
+  }
+}

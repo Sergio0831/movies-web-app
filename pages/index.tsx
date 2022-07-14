@@ -1,13 +1,17 @@
-import { Button } from '@/components/ui';
+import Loading from '@/components/icons/Loading';
+import Main from '@/components/layout/Main';
+import { AuthSection } from '@/components/sections';
 import type { GetServerSideProps, NextPage } from 'next';
-import { getSession, signOut, useSession } from 'next-auth/client';
+import { getSession, useSession } from 'next-auth/client';
 import Head from 'next/head';
 
 const Home: NextPage = () => {
   const [session, loading] = useSession();
 
   if (loading) {
-    return <h2>Loading...</h2>;
+    <AuthSection>
+      <Loading />
+    </AuthSection>;
   }
 
   return (
@@ -19,11 +23,7 @@ const Home: NextPage = () => {
           content='Unlimited films, TV programmes and more.'
         />
       </Head>
-      <h1 className='heading-l'>Entertainment Web App</h1>
-      <h2>Hi {session.user.email}</h2>
-      <Button onClick={() => signOut()} className='btn-fill'>
-        Logout
-      </Button>
+      <Main></Main>
     </>
   );
 };

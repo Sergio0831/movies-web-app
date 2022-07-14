@@ -1,0 +1,8 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+
+.error {
+  @include absolute($top: 0, $right: 1.6rem);
+
+  color: $clr-red;
+}
