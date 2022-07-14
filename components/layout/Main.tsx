@@ -1,4 +1,5 @@
 import Nav from './Nav';
+import classes from './Main.module.scss';
 
 type MainProps = {
   children?: React.ReactNode;
@@ -6,7 +7,7 @@ type MainProps = {
 
 const Main = ({ children }: MainProps) => {
   return (
-    <main>
+    <main className={classes.main}>
       <Nav />
       {children}
     </main>

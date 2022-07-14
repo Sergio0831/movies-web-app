@@ -1,9 +1,10 @@
 import { Main } from '@/components/layout';
+import { SearchForm } from '@/components/ui';
 
 const TvSeriesPage = () => {
   return (
     <Main>
-      <h1 className='heading-l'>Tv Series</h1>
+      <SearchForm placeholder='TV series' />
     </Main>
   );
 };

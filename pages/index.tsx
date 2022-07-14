@@ -1,6 +1,7 @@
 import Loading from '@/components/icons/Loading';
 import Main from '@/components/layout/Main';
 import { AuthSection } from '@/components/sections';
+import { SearchForm } from '@/components/ui';
 import type { GetServerSideProps, NextPage } from 'next';
 import { getSession, useSession } from 'next-auth/client';
 import Head from 'next/head';
@@ -23,7 +24,9 @@ const Home: NextPage = () => {
           content='Unlimited films, TV programmes and more.'
         />
       </Head>
-      <Main></Main>
+      <Main>
+        <SearchForm placeholder='movies or TV series' />
+      </Main>
     </>
   );
 };

@@ -1,9 +1,10 @@
 import { Main } from '@/components/layout';
+import { SearchForm } from '@/components/ui';
 
 const BookmarkedPage = () => {
   return (
     <Main>
-      <h1 className='heading-l'>Bookmarked</h1>
+      <SearchForm placeholder='bookmarked shows' />
     </Main>
   );
 };

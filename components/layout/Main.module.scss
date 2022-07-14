@@ -1,2 +1,7 @@
 @use '@/styles/variables' as *;
 @use '@/styles/mixins' as *;
+
+.main {
+  display: $d-grid;
+  grid-template-columns: auto 1fr;
+}

@@ -1,9 +1,10 @@
 import { Main } from '@/components/layout';
+import { SearchForm } from '@/components/ui';
 
 const MoviesPage = () => {
   return (
     <Main>
-      <h1 className='heading-l'>Movies</h1>
+      <SearchForm placeholder='movies' />
     </Main>
   );
 };
