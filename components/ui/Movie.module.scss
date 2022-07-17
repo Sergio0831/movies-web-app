@@ -1,0 +1,25 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+
+.movie {
+  border-radius: $border-small;
+  overflow: hidden;
+
+  &__image {
+    position: $p-relative;
+    display: $d-grid;
+    height: 17.4rem;
+    cursor: pointer;
+    transition: filter $transition;
+    padding: $padding * 1.6;
+
+    &:hover {
+    }
+  }
+
+  &__bookmark {
+    z-index: 5;
+    align-self: $start;
+    justify-self: $end;
+  }
+}

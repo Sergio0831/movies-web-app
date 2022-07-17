@@ -1,13 +1,18 @@
 import Loading from '@/components/icons/Loading';
+import Grid from '@/components/layout/Grid';
 import Main from '@/components/layout/Main';
-import { AuthSection } from '@/components/sections';
+import { AuthSection, Movies, Trending } from '@/components/sections';
+
 import { SearchForm } from '@/components/ui';
+import SEO from '@/components/ui/SEO';
 import type { GetServerSideProps, NextPage } from 'next';
 import { getSession, useSession } from 'next-auth/client';
 import Head from 'next/head';
+import prisma from 'prisma/prismaClient';
+import { TMovies } from 'types/movies';
 
-const Home: NextPage = () => {
-  const [session, loading] = useSession();
+const Home: NextPage = ({ movies }: TMovies) => {
+  const [loading] = useSession();
 
   if (loading) {
     <AuthSection>
@@ -17,15 +22,20 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <Head>
-        <title>Entertainment Web App</title>
-        <meta
-          name='description'
-          content='Unlimited films, TV programmes and more.'
-        />
-      </Head>
+      <SEO
+        title='Entertainment Web App'
+        content='Unlimited films, TV programmes and more.'
+      />
       <Main>
         <SearchForm placeholder='movies or TV series' />
+        <Trending />
+        <Movies>
+          <Grid>
+            {movies.map((movie) => (
+              <h3>{movie.title}</h3>
+            ))}
+          </Grid>
+        </Movies>
       </Main>
     </>
   );
@@ -35,6 +45,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession({
     req: context.req
   });
+  const movies = await prisma.movie.findMany();
 
   if (!session) {
     return {
@@ -46,7 +57,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   return {
-    props: { session }
+    props: { session, movies }
   };
 };
 

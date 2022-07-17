@@ -2,8 +2,8 @@
 @use '@/styles/mixins' as *;
 
 .form {
-  margin-top: $margin * 5;
-  margin-right: $margin * 3.6;
+  grid-area: form;
+  padding-top: $padding * 1.7;
 
   label {
     display: flex;
@@ -21,6 +21,7 @@
     caret-color: $clr-red;
     background-color: transparent;
     border: none;
+    border-bottom: 1px solid transparent;
     outline: none;
     color: $clr-white;
     font-family: inherit;
@@ -33,7 +34,7 @@
     }
 
     &:focus {
-      border-bottom: 1px solid $clr-greyish-blue;
+      border-bottom-color: $clr-greyish-blue;
     }
   }
 }

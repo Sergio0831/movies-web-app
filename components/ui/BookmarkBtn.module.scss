@@ -1,0 +1,31 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+
+.bookmark {
+  @include flex($align-items: $center, $justify-content: $center);
+  width: 3.2rem;
+  height: 3.2rem;
+  border: none;
+  border-radius: $border-round;
+  cursor: pointer;
+  background-color: rgba($clr-dark-blue, 0.5);
+  transition: background-color $transition;
+
+  svg {
+    path {
+      fill: none;
+      stroke: $clr-white;
+      transition: stroke $transition;
+    }
+  }
+
+  &:hover {
+    background-color: $clr-white;
+
+    svg {
+      path {
+        stroke: $clr-dark-blue;
+      }
+    }
+  }
+}

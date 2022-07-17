@@ -1,0 +1,7 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+
+.movies {
+  grid-area: movies;
+  padding-top: $padding * 2;
+}

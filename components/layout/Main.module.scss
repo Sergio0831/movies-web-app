@@ -3,5 +3,20 @@
 
 .main {
   display: $d-grid;
-  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    'nav form'
+    'nav movies';
+  grid-template-columns: max-content 1fr;
+  grid-template-rows: max-content 1fr;
+  column-gap: $gap * 3.6;
+  padding: $padding * 3.2 $padding * 3.6 0 $padding * 3.2;
+
+  &__home {
+    grid-template-areas:
+      'nav form'
+      'nav trending'
+      'nav movies';
+
+    grid-template-rows: max-content 1fr 1fr;
+  }
 }

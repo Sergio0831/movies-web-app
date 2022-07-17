@@ -24,7 +24,9 @@ const Nav = () => {
                   ariaLabel={link}
                   link={link}
                   className={
-                    router.asPath === link && classes['nav__links-active']
+                    router.asPath === link
+                      ? classes['nav__links-active']
+                      : undefined
                   }
                 >
                   {icon}
@@ -40,13 +42,7 @@ const Nav = () => {
         className={`btn ${classes.nav__avatar}`}
         onClick={() => signOut()}
       >
-        <Avatar
-          avatar={
-            session?.user.image !== null
-              ? session?.user.image
-              : '/assets/image-avatar.png'
-          }
-        />
+        <Avatar avatar={'/assets/image-avatar.png'} />
       </Button>
     </nav>
   );

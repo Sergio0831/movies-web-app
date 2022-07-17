@@ -2,14 +2,14 @@
 @use '@/styles/mixins' as *;
 
 .nav {
+  display: $d-grid;
+  grid-area: nav;
   background-color: $clr-semi-dark-blue;
   width: 9.6rem;
   height: 100vh;
   border-radius: $border-large;
-  display: $d-grid;
   justify-content: $center;
   padding: $padding * 3.5 0;
-  margin: $margin * 3.2;
 
   div {
     @include flex($flex-direction: $column, $align-items: $center);

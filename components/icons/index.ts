@@ -5,6 +5,9 @@ import NavBookmark from './NavBookmark';
 import NavMovies from './NavMovies';
 import NavTvSeries from './NavTvSeries';
 import SearchIcon from './SearchIcon';
+import BookmarkIcon from './BookmarkIcon';
+import MovieIcon from './MovieIcon';
+import TvIcon from './TvIcon';
 
 export {
   Logo,
@@ -13,5 +16,8 @@ export {
   NavBookmark,
   NavMovies,
   NavTvSeries,
-  SearchIcon
+  SearchIcon,
+  BookmarkIcon,
+  MovieIcon,
+  TvIcon
 };

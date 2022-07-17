@@ -1,0 +1,33 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+
+.description {
+  margin-top: 8px;
+
+  ul {
+    display: $d-flex;
+    margin-bottom: 3px;
+  }
+
+  li:not(:last-child) {
+    @include flex($align-items: $center);
+
+    &::after {
+      content: '';
+      width: 3px;
+      height: 3px;
+      border-radius: $border-round;
+      background-color: rgba($clr-white, 0.5);
+      margin-left: 8px;
+      margin-right: 8px;
+    }
+  }
+
+  p {
+    @include flex($align-items: $center);
+  }
+
+  svg {
+    margin-right: 6px;
+  }
+}

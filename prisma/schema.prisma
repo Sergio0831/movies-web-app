@@ -16,3 +16,32 @@ model User {
 
   @@map("users")
 }
+
+type Trending {
+  small String
+  large String
+}
+
+type Regular {
+  small  String
+  medium String
+  large  String
+}
+
+type Thumbnail {
+  trending Trending?
+  regular  Regular
+}
+
+model Movie {
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  thumbnail    Thumbnail
+  year         Int
+  category     String
+  rating       String
+  isBookmarked Boolean
+  isTrending   Boolean
+
+  @@map("movies")
+}
