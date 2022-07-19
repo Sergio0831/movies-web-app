@@ -1,0 +1,18 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+
+.play {
+  @include flex($align-items: $center);
+
+  column-gap: $gap * 2;
+  padding: $padding * 0.9 $padding * 2.4 $padding * 0.9 $padding * 0.9;
+  background-color: rgba($clr-white, 0.25);
+  border-radius: 2.8rem;
+
+  button {
+    @include flex($align-items: $center);
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+}

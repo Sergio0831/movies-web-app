@@ -3,6 +3,7 @@ import { TMovie } from 'types/movies';
 import BookmarkBtn from './BookmarkBtn';
 import Description from './Description';
 import classes from './Movie.module.scss';
+import PlayBtn from './PlayBtn';
 
 type MovieProps = {
   movie: TMovie;
@@ -11,7 +12,10 @@ type MovieProps = {
 const Movie = ({ movie }: MovieProps) => {
   return (
     <article className={classes.movie}>
-      <div className={classes.movie__image}>
+      <div
+        className={classes.movie__image}
+        onClick={() => console.log('image-container')}
+      >
         <BookmarkBtn className={classes.movie__bookmark} />
         <Image
           src={movie.thumbnail.regular.large}
@@ -19,7 +23,9 @@ const Movie = ({ movie }: MovieProps) => {
           alt={movie.title}
           objectFit='cover'
           quality={100}
+          onClick={() => console.log('image')}
         />
+        <PlayBtn className={classes.movie__play} />
       </div>
       <Description
         category={movie.category}

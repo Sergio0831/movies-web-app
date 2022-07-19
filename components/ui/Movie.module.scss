@@ -13,7 +13,18 @@
     transition: filter $transition;
     padding: $padding * 1.6;
 
+    img {
+      transition: opacity $transition;
+    }
+
     &:hover {
+      img {
+        opacity: 0.5;
+      }
+
+      .movie__play {
+        opacity: 1;
+      }
     }
   }
 
@@ -21,5 +32,17 @@
     z-index: 5;
     align-self: $start;
     justify-self: $end;
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+  }
+
+  &__play {
+    z-index: 5;
+    align-self: $center;
+    justify-self: $center;
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    opacity: 0;
+    transition: opacity $transition;
   }
 }

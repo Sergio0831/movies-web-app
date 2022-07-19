@@ -8,6 +8,7 @@ import SearchIcon from './SearchIcon';
 import BookmarkIcon from './BookmarkIcon';
 import MovieIcon from './MovieIcon';
 import TvIcon from './TvIcon';
+import PlayIcon from './PlayIcon';
 
 export {
   Logo,
@@ -19,5 +20,6 @@ export {
   SearchIcon,
   BookmarkIcon,
   MovieIcon,
-  TvIcon
+  TvIcon,
+  PlayIcon
 };

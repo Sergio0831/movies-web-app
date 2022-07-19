@@ -28,4 +28,12 @@
       }
     }
   }
+
+  &__active {
+    svg {
+      path {
+        fill: $clr-white;
+      }
+    }
+  }
 }
