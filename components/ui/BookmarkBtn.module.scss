@@ -19,12 +19,14 @@
     }
   }
 
-  &:hover {
-    background-color: $clr-white;
+  @media (hover: hover) {
+    &:hover {
+      background-color: $clr-white;
 
-    svg {
-      path {
-        stroke: $clr-dark-blue;
+      svg {
+        path {
+          stroke: $clr-dark-blue;
+        }
       }
     }
   }

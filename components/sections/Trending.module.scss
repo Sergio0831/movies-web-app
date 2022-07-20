@@ -3,4 +3,12 @@
 
 .trending {
   grid-area: trending;
+  overflow: hidden;
+
+  &__container {
+    @include flex;
+
+    padding-top: $padding * 2.5;
+    column-gap: $gap * 4;
+  }
 }

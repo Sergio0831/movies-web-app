@@ -28,8 +28,10 @@
       transition: fill $transition;
       fill: $clr-greyish-blue;
 
-      &:hover {
-        fill: $clr-red;
+      @media (hover: hover) {
+        &:hover {
+          fill: $clr-red;
+        }
       }
     }
 

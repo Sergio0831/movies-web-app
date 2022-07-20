@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { BookmarkIcon } from '../icons';
 import classes from './BookmarkBtn.module.scss';
 import Button from './Button';
@@ -19,12 +19,17 @@ const BookmarkBtn = ({ className }: BookmarkBtnProps) => {
     className
   );
 
-  const handleBookmark = () => {
+  const handleBookmark = (e: React.SyntheticEvent<HTMLButtonElement>) => {
     setIsBookmarked((prev) => !prev);
+    e.stopPropagation();
   };
 
   return (
-    <Button className={bookmarkBtnClasses} onClick={handleBookmark}>
+    <Button
+      className={bookmarkBtnClasses}
+      onClick={handleBookmark}
+      ariaLabel='Bookmark Movie'
+    >
       <BookmarkIcon />
     </Button>
   );

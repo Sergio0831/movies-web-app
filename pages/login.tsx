@@ -1,5 +1,5 @@
 import Login from '@/components/authForm/Login';
-import Loading from '@/components/icons/Loading';
+import { Loading } from '@/components/icons';
 import AuthSection from '@/components/sections/AuthSection';
 import { getSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
@@ -21,13 +21,13 @@ const LoginPage = () => {
 
   if (isLoading) {
     return (
-      <AuthSection>
+      <AuthSection aria-labelledby='Loading'>
         <Loading />
       </AuthSection>
     );
   }
   return (
-    <AuthSection>
+    <AuthSection aria-labelledby='Login'>
       <Login />
     </AuthSection>
   );

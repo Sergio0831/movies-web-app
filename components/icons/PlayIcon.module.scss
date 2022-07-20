@@ -1,0 +1,10 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+
+.play {
+  opacity: 0;
+}
+
+.pause {
+  opacity: 1;
+}

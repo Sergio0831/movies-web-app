@@ -2,8 +2,7 @@
 @use '@/styles/mixins' as *;
 
 .movie {
-  border-radius: $border-small;
-  overflow: hidden;
+  position: $p-relative;
 
   &__image {
     position: $p-relative;
@@ -14,26 +13,27 @@
     padding: $padding * 1.6;
 
     img {
+      border-radius: $border-small;
       transition: opacity $transition;
     }
 
-    &:hover {
-      img {
-        opacity: 0.5;
-      }
+    @media (hover: hover) {
+      &:hover {
+        img {
+          opacity: 0.5;
+        }
 
-      .movie__play {
-        opacity: 1;
+        .movie__play {
+          opacity: 1;
+        }
       }
     }
   }
 
   &__bookmark {
     z-index: 5;
-    align-self: $start;
-    justify-self: $end;
-    grid-column: 1 / -1;
-    grid-row: 1 / -1;
+
+    @include absolute($right: 1.6rem, $top: 1.6rem);
   }
 
   &__play {
@@ -44,5 +44,25 @@
     grid-row: 1 / -1;
     opacity: 0;
     transition: opacity $transition;
+
+    svg {
+      transition: opacity $transition;
+      path {
+        transition: opacity $transition;
+      }
+    }
   }
+}
+
+.image__trending {
+  width: 47rem;
+  height: 23rem;
+}
+
+.bookmark__trending {
+  right: 2.4rem;
+}
+
+.description__trending {
+  @include absolute($bottom: 2.4rem, $left: 2.4rem);
 }

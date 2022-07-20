@@ -22,14 +22,14 @@ const SignupPage: NextPage = () => {
 
   if (isLoading) {
     return (
-      <AuthSection>
+      <AuthSection aria-labelledby='Loading'>
         <Loading />
       </AuthSection>
     );
   }
 
   return (
-    <AuthSection>
+    <AuthSection aria-labelledby='Signup'>
       <Signup />
     </AuthSection>
   );

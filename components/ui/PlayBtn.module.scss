@@ -4,15 +4,13 @@
 .play {
   @include flex($align-items: $center);
 
+  width: 12rem;
   column-gap: $gap * 2;
-  padding: $padding * 0.9 $padding * 2.4 $padding * 0.9 $padding * 0.9;
+  padding: $padding * 0.9 0 $padding * 0.9 $padding * 0.9;
   background-color: rgba($clr-white, 0.25);
+  color: inherit;
   border-radius: 2.8rem;
-
-  button {
-    @include flex($align-items: $center);
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-  }
+  cursor: pointer;
+  border: none;
+  outline: none;
 }

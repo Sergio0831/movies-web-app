@@ -1,12 +1,11 @@
 import { navLinks } from '@/data/navLink';
-import { signOut, useSession } from 'next-auth/client';
+import { signOut } from 'next-auth/client';
 import { Logo } from '../icons';
 import { Avatar, Button } from '../ui';
 import { useRouter } from 'next/router';
 import classes from './Nav.module.scss';
 
 const Nav = () => {
-  const [session] = useSession();
   const router = useRouter();
 
   return (

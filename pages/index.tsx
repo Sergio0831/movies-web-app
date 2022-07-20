@@ -1,18 +1,18 @@
-import Loading from '@/components/icons/Loading';
-import Grid from '@/components/layout/Grid';
-import Main from '@/components/layout/Main';
+import { Loading } from '@/components/icons';
+import { Grid, Main } from '@/components/layout';
 import { AuthSection, Movies, Trending } from '@/components/sections';
-
-import { SearchForm } from '@/components/ui';
-import SEO from '@/components/ui/SEO';
+import { Movie, SearchForm, SEO } from '@/components/ui';
+import List from 'generics/List';
 import type { GetServerSideProps, NextPage } from 'next';
 import { getSession, useSession } from 'next-auth/client';
-import Head from 'next/head';
 import prisma from 'prisma/prismaClient';
-import { TMovies } from 'types/movies';
+import { TMovie, TMovies } from 'types/movies';
 
 const Home: NextPage = ({ movies }: TMovies) => {
   const [loading] = useSession();
+
+  const trendingMovies = movies.filter((movie) => movie.isTrending);
+  const recommended = movies.filter((movie) => !movie.isTrending);
 
   if (loading) {
     <AuthSection>
@@ -28,12 +28,18 @@ const Home: NextPage = ({ movies }: TMovies) => {
       />
       <Main>
         <SearchForm placeholder='movies or TV series' />
-        <Trending />
-        <Movies>
+        <Trending
+          trendingMovies={trendingMovies}
+          aria-labelledby='Trending Shows'
+        />
+        <Movies aria-labelledby='Recomendet for you'>
           <Grid>
-            {movies.map((movie) => (
-              <h3>{movie.title}</h3>
-            ))}
+            <List
+              items={recommended}
+              renderItem={(movie: TMovie) => (
+                <Movie key={movie.id} movie={movie} />
+              )}
+            />
           </Grid>
         </Movies>
       </Main>

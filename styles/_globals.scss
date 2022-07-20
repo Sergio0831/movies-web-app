@@ -21,9 +21,33 @@ a {
   color: inherit;
   text-decoration: none;
   display: inline-block;
+
+  &:focus {
+    outline-offset: 5px;
+    outline: 3px dotted $clr-red;
+  }
 }
 
 ul {
   list-style: none;
+}
+
+button:focus {
+  outline-offset: 5px;
+  outline: 3px dotted $clr-red;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 1rem;
+  box-shadow: inset 0 0 10px $clr-greyish-blue;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background-color: $clr-red;
 }
 
