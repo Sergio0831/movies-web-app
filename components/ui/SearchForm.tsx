@@ -5,9 +5,11 @@ import classes from './SearchForm.module.scss';
 
 type SearchFormProps = {
   placeholder: string;
+  search: string;
+  onSearch: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const SearchForm = ({ placeholder }: SearchFormProps) => {
+const SearchForm = ({ placeholder, search, onSearch }: SearchFormProps) => {
   return (
     <form
       className={classes.form}
@@ -21,6 +23,8 @@ const SearchForm = ({ placeholder }: SearchFormProps) => {
           className={`heading-m`}
           type='text'
           placeholder={`Search for ${placeholder}`}
+          value={search}
+          onChange={onSearch}
         />
       </label>
     </form>

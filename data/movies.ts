@@ -1,4 +1,6 @@
-export const movies = [
+import { TMovie } from 'types/movies';
+
+export const movies: TMovie[] = [
   {
     title: 'Beyond Earth',
     thumbnail: {

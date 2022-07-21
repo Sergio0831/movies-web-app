@@ -15,14 +15,14 @@ type Thumbnail = {
 };
 
 export type TMovie = {
-  id: string;
+  id?: string;
   title: string;
   thumbnail: Thumbnail;
   year: number;
   category: string;
   rating: string;
-  isBookmarked: string;
-  isTrending: string;
+  isBookmarked: boolean;
+  isTrending: boolean;
 };
 
 export type TMovies = {

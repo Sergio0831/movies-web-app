@@ -11,9 +11,10 @@
     cursor: pointer;
     transition: filter $transition;
     padding: $padding * 1.6;
+    border-radius: $border-small;
+    overflow: hidden;
 
     img {
-      border-radius: $border-small;
       transition: opacity $transition;
     }
 
@@ -28,6 +29,16 @@
         }
       }
     }
+  }
+
+  &__darken {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.01) 80%,
+      rgba(0, 0, 0, 0.75) 100%
+    );
+    z-index: 2;
+    @include absolute($top: 0, $bottom: 0, $right: 0, $left: 0);
   }
 
   &__bookmark {
@@ -65,4 +76,5 @@
 
 .description__trending {
   @include absolute($bottom: 2.4rem, $left: 2.4rem);
+  z-index: 3;
 }

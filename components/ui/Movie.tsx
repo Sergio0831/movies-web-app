@@ -39,6 +39,7 @@ const Movie = ({ movie, trending }: MovieProps) => {
           priority
         />
         <PlayBtn className={classes.movie__play} />
+        {trending && <div className={classes.movie__darken}></div>}
       </div>
       <Description
         category={movie.category}
