@@ -36,6 +36,8 @@ const Movie = ({ movie, trending }: MovieProps) => {
           alt={movie.title}
           objectFit='cover'
           quality={100}
+          placeholder='blur'
+          blurDataURL='data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
           priority
         />
         <PlayBtn className={classes.movie__play} />
