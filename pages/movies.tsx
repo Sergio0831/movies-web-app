@@ -1,46 +1,55 @@
 import { Loading } from '@/components/icons';
 import { Main } from '@/components/layout';
 import Grid from '@/components/layout/Grid';
-import { AuthSection, Movies } from '@/components/sections';
+import { Movies } from '@/components/sections';
 import { SearchForm } from '@/components/ui';
 import Movie from '@/components/ui/Movie';
-import axios from 'axios';
 import List from 'generics/List';
-import { useDebounce } from 'hooks/useDebounce';
+import useSearch from 'hooks/useSearch';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/client';
 import prisma from 'prisma/prismaClient';
-import React, { useEffect, useState } from 'react';
 import { TMovie, TMovies } from 'types/movies';
 
 const MoviesPage = ({ movies }: TMovies) => {
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
-  };
+  const { onChange, filtered, searchQuery, isLoading } = useSearch<TMovie>(
+    movies,
+    'Movie'
+  );
 
   return (
     <Main>
       <SearchForm
         placeholder='movies'
-        onSearch={handleSearch}
+        onSearch={onChange}
         search={searchQuery}
       />
-      <Movies title='Movies' aria-labelledby='Movies'>
-        {movies.length > 0 ? (
-          <Grid>
-            <List
-              items={movies}
-              renderItem={(movie: TMovie) => (
-                <Movie key={movie.id} movie={movie} />
-              )}
-            />
-          </Grid>
-        ) : (
-          <Loading />
-        )}
-      </Movies>
+      {isLoading && searchQuery ? (
+        <Loading />
+      ) : (
+        <Movies
+          searchQuery={searchQuery}
+          title={
+            searchQuery.length > 0
+              ? `Found ${filtered.length} results for `
+              : 'Movie'
+          }
+          aria-labelledby='Movies'
+        >
+          {movies.length > 0 ? (
+            <Grid>
+              <List
+                items={filtered}
+                renderItem={(movie: TMovie) => (
+                  <Movie key={movie.id} movie={movie} />
+                )}
+              />
+            </Grid>
+          ) : (
+            <Loading />
+          )}
+        </Movies>
+      )}
     </Main>
   );
 };

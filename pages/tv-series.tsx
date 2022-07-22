@@ -5,29 +5,51 @@ import { Movies } from '@/components/sections';
 import { SearchForm } from '@/components/ui';
 import Movie from '@/components/ui/Movie';
 import List from 'generics/List';
+import useSearch from 'hooks/useSearch';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/client';
 import prisma from 'prisma/prismaClient';
 import { TMovie, TMovies } from 'types/movies';
 
 const TvSeriesPage = ({ movies }: TMovies) => {
+  const { filtered, onChange, searchQuery, isLoading } = useSearch<TMovie>(
+    movies,
+    'TV Series'
+  );
+
   return (
     <Main>
-      <SearchForm placeholder='TV series' />
-      <Movies title='TV Series' aria-labelledby='TV Series'>
-        {movies.length > 0 ? (
-          <Grid>
-            <List
-              items={movies}
-              renderItem={(movie: TMovie) => (
-                <Movie key={movie.id} movie={movie} />
-              )}
-            />
-          </Grid>
-        ) : (
-          <Loading />
-        )}
-      </Movies>
+      <SearchForm
+        placeholder='TV series'
+        onSearch={onChange}
+        search={searchQuery}
+      />
+      {isLoading && searchQuery ? (
+        <Loading />
+      ) : (
+        <Movies
+          searchQuery={searchQuery}
+          title={
+            searchQuery.length > 0
+              ? `Found ${filtered.length} results for `
+              : 'TV Series'
+          }
+          aria-labelledby='TV Series'
+        >
+          {movies.length > 0 ? (
+            <Grid>
+              <List
+                items={filtered}
+                renderItem={(movie: TMovie) => (
+                  <Movie key={movie.id} movie={movie} />
+                )}
+              />
+            </Grid>
+          ) : (
+            <Loading />
+          )}
+        </Movies>
+      )}
     </Main>
   );
 };
