@@ -47,6 +47,19 @@
     @include absolute($right: 1.6rem, $top: 1.6rem);
   }
 
+  &__toast {
+    background-color: $clr-greyish-blue !important;
+    color: $clr-white;
+    font-family: inherit;
+    font-size: $fsz-s;
+    font-weight: $fw-light;
+
+    button {
+      color: $clr-white;
+      opacity: 1;
+    }
+  }
+
   &__play {
     z-index: 5;
     align-self: $center;

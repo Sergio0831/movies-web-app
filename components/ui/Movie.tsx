@@ -1,5 +1,7 @@
 import clsx from 'clsx';
 import Image from 'next/image';
+import { useCallback } from 'react';
+import { toast } from 'react-toastify';
 import { TMovie } from 'types/movies';
 import BookmarkBtn from './BookmarkBtn';
 import Description from './Description';
@@ -22,9 +24,17 @@ const Movie = ({ movie, trending }: MovieProps) => {
     [classes.description__trending]: trending
   });
 
+  const notify = useCallback((message: string) => {
+    toast(message, {
+      className: `${classes.movie__toast}`
+    });
+  }, []);
+
   return (
     <article className={classes.movie}>
       <BookmarkBtn
+        notify={notify}
+        movieTitle={movie.title}
         className={`${classes.movie__bookmark} ${
           trending ? classes.bookmark__trending : ''
         }`}

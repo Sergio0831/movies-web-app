@@ -1,14 +1,17 @@
 import clsx from 'clsx';
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import { BookmarkIcon } from '../icons';
 import classes from './BookmarkBtn.module.scss';
 import Button from './Button';
 
 type BookmarkBtnProps = {
   className?: string;
+  movieTitle: string;
+  notify: (message: string) => void;
 };
 
-const BookmarkBtn = ({ className }: BookmarkBtnProps) => {
+const BookmarkBtn = ({ className, movieTitle, notify }: BookmarkBtnProps) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
 
   const bookmarkBtnClasses = clsx(
@@ -21,6 +24,9 @@ const BookmarkBtn = ({ className }: BookmarkBtnProps) => {
 
   const handleBookmark = (e: React.SyntheticEvent<HTMLButtonElement>) => {
     setIsBookmarked((prev) => !prev);
+    isBookmarked
+      ? notify(`${movieTitle} removed from bookmarks`)
+      : notify(`${movieTitle} added to bookmarks`);
     e.stopPropagation();
   };
 

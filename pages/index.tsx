@@ -7,6 +7,7 @@ import useSearch from 'hooks/useSearch';
 import type { GetServerSideProps, NextPage } from 'next';
 import { getSession, useSession } from 'next-auth/client';
 import prisma from 'prisma/prismaClient';
+import { toast } from 'react-toastify';
 import { TMovie, TMovies } from 'types/movies';
 
 const Home: NextPage = ({ movies }: TMovies) => {
