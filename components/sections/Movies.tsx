@@ -4,7 +4,7 @@ import classes from './Movies.module.scss';
 type MoviesProps = {
   title?: string;
   children?: React.ReactNode;
-  searchQuery: string;
+  searchQuery?: string;
 };
 
 const Movies = ({ title, children, searchQuery }: MoviesProps) => {

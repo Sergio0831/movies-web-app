@@ -1,6 +1,7 @@
+import axios from 'axios';
 import clsx from 'clsx';
 import Image from 'next/image';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
 import { TMovie } from 'types/movies';
 import BookmarkBtn from './BookmarkBtn';
@@ -30,10 +31,20 @@ const Movie = ({ movie, trending }: MovieProps) => {
     });
   }, []);
 
+  const handleBookmark = async (isBookmarked: boolean) => {
+    await fetch('/api/bookmarks', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: movie.id, isBookmarked })
+    });
+  };
+
   return (
     <article className={classes.movie}>
       <BookmarkBtn
         notify={notify}
+        bookmarked={movie.isBookmarked}
+        onBookmark={handleBookmark}
         movieTitle={movie.title}
         className={`${classes.movie__bookmark} ${
           trending ? classes.bookmark__trending : ''

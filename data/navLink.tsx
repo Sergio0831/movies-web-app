@@ -9,5 +9,5 @@ export const navLinks = [
   { link: '/', icon: <NavHome /> },
   { link: '/movies', icon: <NavMovies /> },
   { link: '/tv-series', icon: <NavTvSeries /> },
-  { link: '/bookmarked', icon: <NavBookmark /> }
+  { link: '/bookmarks', icon: <NavBookmark /> }
 ];
