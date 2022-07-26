@@ -1,9 +1,14 @@
-const Loading = () => {
+type LoadingProps = {
+  width?: string;
+  height?: string;
+};
+
+const Loading = ({ width, height }: LoadingProps) => {
   return (
     <svg
       style={{ margin: 'auto', display: 'block', shapeRendering: 'auto' }}
-      width='10rem'
-      height='10rem'
+      width={width ? width : '8rem'}
+      height={height ? height : '8rem'}
       viewBox='0 0 100 100'
       preserveAspectRatio='xMidYMid'
     >
@@ -20,7 +25,7 @@ const Loading = () => {
           attributeName='transform'
           type='rotate'
           repeatCount='indefinite'
-          dur='1s'
+          dur='500ms'
           values='0 50 50;360 50 50'
           keyTimes='0;1'
         ></animateTransform>

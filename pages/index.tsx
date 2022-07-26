@@ -1,28 +1,20 @@
 import { Loading } from '@/components/icons';
 import { Grid, Main } from '@/components/layout';
-import { AuthSection, Movies, Trending } from '@/components/sections';
+import { Movies, Trending } from '@/components/sections';
 import { Movie, SearchForm, SEO } from '@/components/ui';
+import { useGetMoviesQuery } from 'app/movie.api';
 import List from 'generics/List';
 import useSearch from 'hooks/useSearch';
 import type { GetServerSideProps, NextPage } from 'next';
-import { getSession, useSession } from 'next-auth/client';
-import prisma from 'prisma/prismaClient';
-import { toast } from 'react-toastify';
-import { TMovie, TMovies } from 'types/movies';
+import { getSession } from 'next-auth/client';
+import { TMovie } from 'types/movies';
 
-const Home: NextPage = ({ movies }: TMovies) => {
-  const { filtered, onChange, searchQuery, isLoading } =
-    useSearch<TMovie>(movies);
-  const [loading] = useSession();
+const Home: NextPage = () => {
+  const { data, isSuccess, isLoading: loading } = useGetMoviesQuery();
+  const { onChange, searchQuery, isLoading, movies } = useSearch<TMovie>(data);
 
-  const trendingMovies = movies.filter((movie) => movie.isTrending);
-  const recommended = movies.filter((movie) => !movie.isTrending);
-
-  if (loading) {
-    <AuthSection>
-      <Loading />
-    </AuthSection>;
-  }
+  const trendingMovies = isSuccess && data.filter((movie) => movie.isTrending);
+  const recommended = isSuccess && data.filter((movie) => !movie.isTrending);
 
   return (
     <>
@@ -40,30 +32,35 @@ const Home: NextPage = ({ movies }: TMovies) => {
           <Loading />
         ) : (
           <>
-            {!searchQuery && (
-              <Trending
-                trendingMovies={trendingMovies}
-                aria-labelledby='Trending Shows'
-              />
+            {loading && <Loading />}
+            {isSuccess && (
+              <>
+                {!searchQuery && (
+                  <Trending
+                    trendingMovies={trendingMovies}
+                    aria-labelledby='Trending Shows'
+                  />
+                )}
+                <Movies
+                  aria-labelledby='Recomendet for you'
+                  searchQuery={searchQuery}
+                  title={
+                    searchQuery.length > 0
+                      ? `Found ${movies.length} results for `
+                      : 'Recommendet for you'
+                  }
+                >
+                  <Grid>
+                    <List
+                      items={searchQuery ? movies : recommended}
+                      renderItem={(movie: TMovie) => (
+                        <Movie key={movie.id} movie={movie} />
+                      )}
+                    />
+                  </Grid>
+                </Movies>
+              </>
             )}
-            <Movies
-              aria-labelledby='Recomendet for you'
-              searchQuery={searchQuery}
-              title={
-                searchQuery.length > 0
-                  ? `Found ${filtered.length} results for `
-                  : 'Recommendet for you'
-              }
-            >
-              <Grid>
-                <List
-                  items={searchQuery ? filtered : recommended}
-                  renderItem={(movie: TMovie) => (
-                    <Movie key={movie.id} movie={movie} />
-                  )}
-                />
-              </Grid>
-            </Movies>
           </>
         )}
       </Main>
@@ -75,7 +72,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession({
     req: context.req
   });
-  const movies = await prisma.movie.findMany();
 
   if (!session) {
     return {
@@ -87,7 +83,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   return {
-    props: { session, movies }
+    props: { session }
   };
 };
 

@@ -2,26 +2,29 @@ import { Loading } from '@/components/icons';
 import { Grid, Main } from '@/components/layout';
 import { Movies } from '@/components/sections';
 import { Movie, SearchForm } from '@/components/ui';
+import { useGetBookmarkedMoviesQuery } from 'app/movie.api';
 import List from 'generics/List';
 import useSearch from 'hooks/useSearch';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/client';
-import prisma from 'prisma/prismaClient';
-import { TMovie, TMovies } from 'types/movies';
+import { TMovie } from 'types/movies';
 
-const BookmarksPage = ({ movies }: TMovies) => {
-  const { filtered, onChange, searchQuery, isLoading } =
-    useSearch<TMovie>(movies);
+const BookmarksPage = () => {
+  const { data, isSuccess, isLoading: loading } = useGetBookmarkedMoviesQuery();
 
-  const moviesByCategories = movies.reduce((total, item, _, array) => {
-    const { category } = item;
-    total[category] = {
-      label: category,
-      movies: array.filter((movie) => movie.category === category)
-    };
+  const { onChange, searchQuery, isLoading, movies } = useSearch(data);
 
-    return total;
-  }, {});
+  const moviesByCategories =
+    isSuccess &&
+    data.reduce((total, item, _, array) => {
+      const { category } = item;
+      total[category] = {
+        label: category,
+        movies: array.filter((movie) => movie.category === category)
+      };
+
+      return total;
+    }, {});
 
   return (
     <Main>
@@ -36,48 +39,59 @@ const BookmarksPage = ({ movies }: TMovies) => {
         ) : (
           <Movies
             searchQuery={searchQuery}
-            title={`Found ${filtered.length} results for `}
+            title={`Found ${movies.length} results for `}
             aria-labelledby='Bookmarked Movies'
           >
-            {movies.length > 0 ? (
-              <Grid>
-                <List
-                  items={filtered}
-                  renderItem={(movie: TMovie) => (
-                    <Movie key={movie.id} movie={movie} />
-                  )}
-                />
-              </Grid>
-            ) : (
-              <Loading />
-            )}
+            <Grid>
+              <List
+                items={movies}
+                renderItem={(movie: TMovie) => (
+                  <Movie key={movie.id} movie={movie} />
+                )}
+              />
+            </Grid>
           </Movies>
         )
       ) : (
-        <section>
-          {Object.values(moviesByCategories)
-            .map(({ label, movies }: { label: string; movies: TMovie[] }) => (
-              <Movies
-                key={label}
-                title={`Bookmarked ${label}`}
-                aria-labelledby='Bookmarked Movies'
-              >
-                {movies.length > 0 ? (
-                  <Grid>
-                    <List
-                      items={movies}
-                      renderItem={(movie: TMovie) => (
-                        <Movie key={movie.id} movie={movie} />
-                      )}
-                    />
-                  </Grid>
-                ) : (
-                  <Loading />
-                )}
-              </Movies>
-            ))
-            .reverse()}
-        </section>
+        <>
+          {loading && <Loading />}
+          <section>
+            {isSuccess && (
+              <>
+                {Object.values(moviesByCategories)
+                  .map(
+                    ({
+                      label,
+                      movies
+                    }: {
+                      label: string;
+                      movies: TMovie[];
+                    }) => (
+                      <Movies
+                        key={label}
+                        title={`Bookmarked ${label}`}
+                        aria-labelledby='Bookmarked Movies'
+                      >
+                        {movies.length > 0 ? (
+                          <Grid>
+                            <List
+                              items={movies}
+                              renderItem={(movie: TMovie) => (
+                                <Movie key={movie.id} movie={movie} />
+                              )}
+                            />
+                          </Grid>
+                        ) : (
+                          <Loading />
+                        )}
+                      </Movies>
+                    )
+                  )
+                  .reverse()}
+              </>
+            )}
+          </section>
+        </>
       )}
     </Main>
   );
@@ -86,11 +100,6 @@ const BookmarksPage = ({ movies }: TMovies) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession({
     req: context.req
-  });
-  const movies = await prisma.movie.findMany({
-    where: {
-      isBookmarked: true
-    }
   });
 
   if (!session) {
@@ -103,7 +112,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   return {
-    props: { session, movies }
+    props: { session }
   };
 };
 

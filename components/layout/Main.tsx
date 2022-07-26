@@ -27,7 +27,6 @@ const Main = ({ children, searchQuery }: MainProps) => {
         autoClose={3000}
         newestOnTop={false}
         closeOnClick
-        hideProgressBar={true}
         rtl={false}
         pauseOnFocusLoss
         draggable

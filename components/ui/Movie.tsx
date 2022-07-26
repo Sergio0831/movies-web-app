@@ -1,7 +1,7 @@
-import axios from 'axios';
+import { useToggleBookmarksMutation } from 'app/movie.api';
 import clsx from 'clsx';
 import Image from 'next/image';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { TMovie } from 'types/movies';
 import BookmarkBtn from './BookmarkBtn';
@@ -25,24 +25,24 @@ const Movie = ({ movie, trending }: MovieProps) => {
     [classes.description__trending]: trending
   });
 
-  const notify = useCallback((message: string) => {
-    toast(message, {
-      className: `${classes.movie__toast}`
-    });
-  }, []);
+  const [toggleBookmarks, { isLoading, isSuccess }] =
+    useToggleBookmarksMutation();
 
-  const handleBookmark = async (isBookmarked: boolean) => {
-    await fetch('/api/bookmarks', {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: movie.id, isBookmarked })
-    });
+  const handleBookmark = async () => {
+    await toggleBookmarks({ id: movie.id, isBookmarked: !movie.isBookmarked });
   };
+
+  useEffect(() => {
+    if (isSuccess && movie.isBookmarked === false) {
+      toast.success(`${movie.title} added to bookmarks`);
+    } else if (isSuccess && movie.isBookmarked === true) {
+      toast.success(`${movie.title} removed from bookmarks`);
+    }
+  }, [isLoading]);
 
   return (
     <article className={classes.movie}>
       <BookmarkBtn
-        notify={notify}
         bookmarked={movie.isBookmarked}
         onBookmark={handleBookmark}
         movieTitle={movie.title}

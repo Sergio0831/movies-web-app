@@ -4,16 +4,21 @@ import Grid from '@/components/layout/Grid';
 import { Movies } from '@/components/sections';
 import { SearchForm } from '@/components/ui';
 import Movie from '@/components/ui/Movie';
+import { useGetMoviesByCategoryQuery } from 'app/movie.api';
 import List from 'generics/List';
 import useSearch from 'hooks/useSearch';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/client';
-import prisma from 'prisma/prismaClient';
-import { TMovie, TMovies } from 'types/movies';
+import { TMovie } from 'types/movies';
 
-const TvSeriesPage = ({ movies }: TMovies) => {
-  const { filtered, onChange, searchQuery, isLoading } = useSearch<TMovie>(
-    movies,
+const TvSeriesPage = () => {
+  const {
+    data,
+    isSuccess,
+    isLoading: loading
+  } = useGetMoviesByCategoryQuery('TV Series');
+  const { onChange, movies, searchQuery, isLoading } = useSearch<TMovie>(
+    data,
     'TV Series'
   );
 
@@ -27,28 +32,29 @@ const TvSeriesPage = ({ movies }: TMovies) => {
       {isLoading && searchQuery ? (
         <Loading />
       ) : (
-        <Movies
-          searchQuery={searchQuery}
-          title={
-            searchQuery.length > 0
-              ? `Found ${filtered.length} results for `
-              : 'TV Series'
-          }
-          aria-labelledby='TV Series'
-        >
-          {movies.length > 0 ? (
-            <Grid>
-              <List
-                items={filtered}
-                renderItem={(movie: TMovie) => (
-                  <Movie key={movie.id} movie={movie} />
-                )}
-              />
-            </Grid>
-          ) : (
-            <Loading />
+        <>
+          {loading && <Loading />}
+          {isSuccess && (
+            <Movies
+              searchQuery={searchQuery}
+              title={
+                searchQuery.length > 0
+                  ? `Found ${movies.length} results for `
+                  : 'TV Series'
+              }
+              aria-labelledby='TV Series'
+            >
+              <Grid>
+                <List
+                  items={searchQuery ? movies : data}
+                  renderItem={(movie: TMovie) => (
+                    <Movie key={movie.id} movie={movie} />
+                  )}
+                />
+              </Grid>
+            </Movies>
           )}
-        </Movies>
+        </>
       )}
     </Main>
   );
@@ -57,11 +63,6 @@ const TvSeriesPage = ({ movies }: TMovies) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession({
     req: context.req
-  });
-  const movies = await prisma.movie.findMany({
-    where: {
-      category: 'TV Series'
-    }
   });
 
   if (!session) {
@@ -74,7 +75,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   return {
-    props: { session, movies }
+    props: { session }
   };
 };
 

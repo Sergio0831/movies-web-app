@@ -1,32 +1,22 @@
+import { TMovie } from 'types/movies';
+import { useDebounce } from './useDebounce';
+import { useSearchMoviesMutation } from 'app/movie.api';
 import { useState } from 'react';
 
 const useSearch = <T = object>(items: T[], category?: string) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filtered, setFiltered] = useState<T[]>(items);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const handleSearch = async (searchQuery: string, category: string) => {
-    setIsLoading(true);
-    const response = await fetch('/api/search', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ searchQuery, category })
-    });
-    const result = await response.json();
-    if (result) {
-      setFiltered(result);
-      setIsLoading(false);
-    }
-  };
+  const debounced = useDebounce(searchQuery);
+  const [searchMovies, { isLoading, isSuccess: success, data: movies }] =
+    useSearchMoviesMutation();
 
   const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchQuery(value);
     if (value) {
-      handleSearch(value, category);
+      await searchMovies({ searchQuery: value, category: category });
     } else {
       setFiltered(items);
-      setIsLoading(false);
     }
   };
 
@@ -34,7 +24,9 @@ const useSearch = <T = object>(items: T[], category?: string) => {
     searchQuery,
     onChange,
     filtered,
-    isLoading
+    isLoading,
+    movies,
+    success
   };
 };
 

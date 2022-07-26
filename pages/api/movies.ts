@@ -15,25 +15,20 @@ export default async function handler(
   const user = await prisma.user.findUnique({
     where: { email: session.user.email }
   });
-  const { id, isBookmarked } = req.body;
+
   if (!user) {
     return res.status(201).json({ message: 'Unauthorized' });
   }
 
-  if (req.method === 'PATCH') {
+  if (req.method === 'GET') {
     try {
-      const movie = await prisma.movie.update({
-        where: { id },
-        data: {
-          isBookmarked: isBookmarked
-        }
-      });
+      const movie = await prisma.movie.findMany();
       res.status(200).json(movie);
     } catch (error) {
       res.status(500).json({ message: 'Something went wrong' });
     }
   } else {
-    res.setHeader('Allow', ['PATCH']);
+    res.setHeader('Allow', ['GET']);
     res
       .status(405)
       .json({ message: `HTTP method ${req.method} is not supported.` });

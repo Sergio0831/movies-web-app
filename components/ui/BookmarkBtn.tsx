@@ -9,37 +9,32 @@ type BookmarkBtnProps = {
   className?: string;
   movieTitle: string;
   bookmarked: boolean;
-  notify: (message: string) => void;
-  onBookmark: (isBookmarked: boolean) => void;
+  onBookmark: () => void;
 };
 
 const BookmarkBtn = ({
   className,
-  movieTitle,
-  notify,
   onBookmark,
   bookmarked
 }: BookmarkBtnProps) => {
-  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(bookmarked);
 
   const bookmarkBtnClasses = clsx(
     {
       [classes.bookmark]: true,
-      [classes.bookmark__active]: isBookmarked || bookmarked
+      [classes.bookmark__active]: isBookmarked
     },
     className
   );
 
-  const handleBookmark = (e: React.SyntheticEvent<HTMLButtonElement>) => {
-    setIsBookmarked((prev) => !prev);
-    onBookmark(isBookmarked);
-    e.stopPropagation();
-  };
-
   return (
     <Button
       className={bookmarkBtnClasses}
-      onClick={handleBookmark}
+      onClick={(e: React.SyntheticEvent<HTMLButtonElement>) => {
+        setIsBookmarked((prev) => !prev);
+        onBookmark();
+        e.stopPropagation();
+      }}
       ariaLabel='Bookmark Movie'
     >
       <BookmarkIcon />
