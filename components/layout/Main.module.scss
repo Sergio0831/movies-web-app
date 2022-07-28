@@ -1,21 +1,40 @@
 @use '@/styles/variables' as *;
 @use '@/styles/mixins' as *;
+@use '@/styles/breakpoints' as *;
 
 .main {
   display: $d-grid;
   grid-template-areas:
-    'nav form'
-    'nav movies';
-  grid-template-columns: max-content 1fr;
+    'nav'
+    'form'
+    'movies';
+  grid-template-columns: 1fr;
   grid-template-rows: auto 1fr;
-  column-gap: $gap * 3.6;
-  padding: $padding * 3.2 $padding * 3.6 0 $padding * 3.2;
+  padding: $padding * 2.5;
   position: relative;
+
+  @include tablet {
+    grid-template-areas:
+      'nav form'
+      'nav movies';
+    grid-template-columns: max-content 1fr;
+    grid-template-rows: auto 1fr;
+    padding: $padding * 3.2 $padding * 3.6 $padding * 3.2 $padding * 3.2;
+    column-gap: $gap * 2.6;
+  }
 
   &__home {
     grid-template-areas:
-      'nav form'
-      'nav trending'
-      'nav movies';
+      'nav'
+      'form'
+      'trending'
+      'movies';
+
+    @include tablet {
+      grid-template-areas:
+        'nav form'
+        'nav trending'
+        'nav movies';
+    }
   }
 }

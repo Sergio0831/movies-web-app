@@ -1,5 +1,5 @@
-import Signup from '@/components/authForm/Signup';
-import Loading from '@/components/icons/Loading';
+import { Signup } from '@/components/authForm';
+import { Loading } from '@/components/icons';
 import AuthSection from '@/components/sections/AuthSection';
 import { NextPage } from 'next';
 import { getSession } from 'next-auth/client';

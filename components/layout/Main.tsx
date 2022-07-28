@@ -24,10 +24,12 @@ const Main = ({ children, searchQuery }: MainProps) => {
       {children}
       <ToastContainer
         position='top-right'
-        autoClose={3000}
+        autoClose={2000}
         newestOnTop={false}
         closeOnClick
-        rtl={false}
+        toastClassName='toast'
+        bodyClassName='toast__body'
+        progressClassName='toast__progress'
         pauseOnFocusLoss
         draggable
         pauseOnHover

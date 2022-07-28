@@ -1,3 +1,4 @@
+import { User } from './../types/user';
 import { TMovie } from 'types/movies';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
 
@@ -9,12 +10,14 @@ export const movieApi = createApi({
     getMovies: build.query<TMovie[], void>({
       query: () => ({
         url: '/movies'
-      })
+      }),
+      providesTags: ['Movie']
     }),
     getMoviesByCategory: build.query<TMovie[], string>({
       query: (category) => ({
         url: `/${category}`
-      })
+      }),
+      providesTags: ['Movie']
     }),
     getBookmarkedMovies: build.query<TMovie[], void>({
       query: () => ({
@@ -42,6 +45,16 @@ export const movieApi = createApi({
         method: 'POST',
         body: { searchQuery, category }
       })
+    }),
+    signupUser: build.mutation<
+      User,
+      { email: string; password: string; passwordMatch: string }
+    >({
+      query: (data) => ({
+        url: '/auth/signup',
+        method: 'POST',
+        body: data
+      })
     })
   })
 });
@@ -51,5 +64,6 @@ export const {
   useGetMoviesByCategoryQuery,
   useGetBookmarkedMoviesQuery,
   useToggleBookmarksMutation,
-  useSearchMoviesMutation
+  useSearchMoviesMutation,
+  useSignupUserMutation
 } = movieApi;

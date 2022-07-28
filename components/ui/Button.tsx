@@ -6,6 +6,7 @@ type ButtonProps = {
   activeClassName?: string;
   ariaLabel?: string;
   link?: string;
+  disabled?: boolean;
   name?: string;
   form?: string;
   children?: React.ReactNode;
@@ -20,6 +21,7 @@ const Button = ({
   onClick,
   ariaLabel,
   name,
+  disabled,
   form
 }: ButtonProps) => {
   if (link) {
@@ -40,6 +42,7 @@ const Button = ({
       onClick={onClick}
       form={form}
       aria-label={ariaLabel}
+      disabled={disabled}
     >
       {children}
     </button>

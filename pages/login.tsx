@@ -1,6 +1,6 @@
-import Login from '@/components/authForm/Login';
+import { Login } from '@/components/authForm';
 import { Loading } from '@/components/icons';
-import AuthSection from '@/components/sections/AuthSection';
+import { AuthSection } from '@/components/sections';
 import { getSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -21,15 +21,19 @@ const LoginPage = () => {
 
   if (isLoading) {
     return (
-      <AuthSection aria-labelledby='Loading'>
-        <Loading />
-      </AuthSection>
+      <main>
+        <AuthSection aria-labelledby='Loading'>
+          <Loading />
+        </AuthSection>
+      </main>
     );
   }
   return (
-    <AuthSection aria-labelledby='Login'>
-      <Login />
-    </AuthSection>
+    <main>
+      <AuthSection aria-labelledby='Login'>
+        <Login />
+      </AuthSection>
+    </main>
   );
 };
 export default LoginPage;

@@ -17,12 +17,14 @@
   background-color: $clr-red;
   color: $clr-white;
   border-radius: $border-xsmall;
-  padding: $padding * 1.4 0;
+  height: 4.8rem;
   transition: background-color $transition, color $transition;
 
-  &:hover {
-    background-color: $clr-white;
-    color: $clr-semi-dark-blue;
+  @include hover {
+    &:hover {
+      background-color: $clr-white;
+      color: $clr-semi-dark-blue;
+    }
   }
 }
 

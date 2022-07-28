@@ -51,3 +51,24 @@ button:focus {
   background-color: $clr-red;
 }
 
+.toast {
+  color: $clr-dark-blue;
+
+  button {
+    color: $clr-dark-blue;
+  }
+
+  &__body {
+    font-size: $fsz-s;
+    column-gap: $gap * 2;
+
+    svg {
+      fill: $clr-red;
+    }
+  }
+
+  &__progress {
+    background: $clr-red !important;
+  }
+}
+

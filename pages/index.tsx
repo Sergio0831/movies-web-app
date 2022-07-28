@@ -20,7 +20,7 @@ const Home: NextPage = () => {
     <>
       <SEO
         title='Entertainment Web App'
-        content='Unlimited films, TV programmes and more.'
+        description='Unlimited films, TV programmes and more.'
       />
       <Main searchQuery={searchQuery}>
         <SearchForm

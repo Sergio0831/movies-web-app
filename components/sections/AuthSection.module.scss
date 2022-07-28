@@ -1,9 +1,15 @@
 @use '@/styles/variables' as *;
 @use '@/styles/mixins' as *;
+@use '@/styles/breakpoints' as *;
 
 .section {
   @include flex($flex-direction: $column, $align-items: $center);
 
-  padding-top: $padding * 7.8;
-  row-gap: $gap * 8;
+  padding: $padding * 4.8 $padding * 2.4 0;
+  row-gap: $gap * 4.8;
+
+  @include mobile {
+    padding: $padding * 8 $padding * 2.4 0;
+    row-gap: $gap * 8;
+  }
 }
