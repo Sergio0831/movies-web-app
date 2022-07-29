@@ -14,7 +14,7 @@ const useSearch = <T = object>(items: T[], category?: string) => {
     const value = e.target.value;
     setSearchQuery(value);
     if (value) {
-      await searchMovies({ searchQuery: value, category: category });
+      await searchMovies({ searchQuery: debounced, category: category });
     } else {
       setFiltered(items);
     }

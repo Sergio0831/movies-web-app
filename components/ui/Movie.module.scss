@@ -18,7 +18,7 @@
       transition: opacity $transition;
     }
 
-    @media (hover: hover) {
+    @include hover() {
       &:hover {
         img {
           opacity: 0.5;

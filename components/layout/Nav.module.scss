@@ -1,34 +1,59 @@
 @use '@/styles/variables' as *;
 @use '@/styles/mixins' as *;
+@use '@/styles/breakpoints' as *;
 
 .nav {
-  display: $d-grid;
+  @include flex($align-items: $center, $justify-content: space-between);
+
+  padding: 0 $padding * 1.6 0 $padding * 2.4;
   grid-area: nav;
   background-color: $clr-semi-dark-blue;
-  width: 9.6rem;
-  height: 100vh;
+  width: 100%;
+  height: 7.2rem;
   border-radius: $border-large;
-  justify-content: $center;
-  padding: $padding * 3.5 0;
+
+  @include tablet {
+    display: $d-grid;
+    grid-template-rows: auto 1fr auto;
+    align-items: unset;
+    width: 9.6rem;
+    height: 100vh;
+    justify-content: $center;
+    padding: $padding * 3.5 0;
+  }
 
   div {
-    @include flex($flex-direction: $column, $align-items: $center);
+    @include flex($align-items: $center);
+
+    @include tablet {
+      @include flex($flex-direction: $column, $align-items: $center);
+    }
   }
 
   &__logo {
-    margin-bottom: $margin * 7.5;
+    margin-bottom: 0;
+
+    @include tablet {
+      margin-bottom: $margin * 7.5;
+    }
   }
 
   &__links {
-    @include flex($flex-direction: $column, $align-items: $center);
+    @include flex($align-items: $center);
 
-    row-gap: $gap * 4;
+    column-gap: $gap * 3.2;
+
+    @include tablet {
+      @include flex($flex-direction: $column, $align-items: $center);
+
+      row-gap: $gap * 4;
+    }
 
     svg {
       transition: fill $transition;
       fill: $clr-greyish-blue;
 
-      @media (hover: hover) {
+      @include hover() {
         &:hover {
           fill: $clr-red;
         }
@@ -43,7 +68,11 @@
   }
 
   &__avatar {
-    align-self: $end;
+    align-self: $center;
     background: transparent;
+
+    @include tablet {
+      align-self: $end;
+    }
   }
 }

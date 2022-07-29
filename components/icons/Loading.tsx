@@ -1,9 +1,10 @@
 type LoadingProps = {
   width?: string;
   height?: string;
+  stroke?: string;
 };
 
-const Loading = ({ width, height }: LoadingProps) => {
+const Loading = ({ width, height, stroke }: LoadingProps) => {
   return (
     <svg
       style={{ margin: 'auto', display: 'block', shapeRendering: 'auto' }}
@@ -16,7 +17,7 @@ const Loading = ({ width, height }: LoadingProps) => {
         cx='50'
         cy='50'
         fill='none'
-        stroke='#fc4747'
+        stroke={stroke ? stroke : '#fc4747'}
         strokeWidth='10'
         r='35'
         strokeDasharray='164.93361431346415 56.97787143782138'

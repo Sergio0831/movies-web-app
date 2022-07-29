@@ -3,15 +3,17 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { Inputs } from 'types/Inputs';
 import Form from './Form';
 import classes from './AuthForm.module.scss';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Label from './Label';
 import ErrorMessage from './ErrorMessage';
 import { Button } from '../ui';
 import FormFooter from './FormFooter';
 import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/client';
+import { Loading } from '../icons';
 
 const Login = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const {
     register,
@@ -22,6 +24,7 @@ const Login = () => {
   } = useForm<Inputs>({ mode: 'onChange' });
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const { email, password } = data;
+    setIsLoading(true);
     const result = await signIn('credentials', {
       redirect: false,
       email,
@@ -32,10 +35,12 @@ const Login = () => {
       setError('email', {
         message: result.error
       });
+      setIsLoading(false);
     }
 
     if (!result.error) {
       router.replace('/');
+      setIsLoading(false);
     }
   };
 
@@ -83,7 +88,11 @@ const Login = () => {
         )}
       </Label>
       <Button type='submit' className='btn-fill'>
-        Login to your account
+        {isLoading ? (
+          <Loading height='2rem' width='2rem' stroke='#fff' />
+        ) : (
+          'Login to your account'
+        )}
       </Button>
       <FormFooter
         link='signup'

@@ -10,31 +10,29 @@ const Nav = () => {
 
   return (
     <nav className={classes.nav}>
-      <div>
-        <Button link='/' ariaLabel='Logo' className={classes.nav__logo}>
-          <Logo />
-        </Button>
-        <ul className={classes.nav__links}>
-          {navLinks.map((navLink) => {
-            const { icon, link } = navLink;
-            return (
-              <li key={link}>
-                <Button
-                  ariaLabel={link}
-                  link={link}
-                  className={
-                    router.asPath === link
-                      ? classes['nav__links-active']
-                      : undefined
-                  }
-                >
-                  {icon}
-                </Button>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      <Button link='/' ariaLabel='Logo' className={classes.nav__logo}>
+        <Logo />
+      </Button>
+      <ul className={classes.nav__links}>
+        {navLinks.map((navLink) => {
+          const { icon, link } = navLink;
+          return (
+            <li key={link}>
+              <Button
+                ariaLabel={link}
+                link={link}
+                className={
+                  router.asPath === link
+                    ? classes['nav__links-active']
+                    : undefined
+                }
+              >
+                {icon}
+              </Button>
+            </li>
+          );
+        })}
+      </ul>
       <Button
         ariaLabel='avatar'
         type='button'

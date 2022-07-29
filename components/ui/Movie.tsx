@@ -33,9 +33,9 @@ const Movie = ({ movie, trending }: MovieProps) => {
   };
 
   useEffect(() => {
-    if (isSuccess && movie.isBookmarked === false) {
+    if (isSuccess && !movie.isBookmarked) {
       toast.success(`${movie.title} added to bookmarks`);
-    } else if (isSuccess && movie.isBookmarked === true) {
+    } else if (isSuccess && movie.isBookmarked) {
       toast.success(`${movie.title} removed from bookmarks`);
     }
   }, [isLoading]);

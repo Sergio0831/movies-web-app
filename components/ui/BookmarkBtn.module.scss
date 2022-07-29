@@ -19,7 +19,7 @@
     }
   }
 
-  @media (hover: hover) {
+  @include hover() {
     &:hover {
       background-color: $clr-white;
 
