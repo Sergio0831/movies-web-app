@@ -1,10 +1,9 @@
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import { verifyPassword } from 'lib/auth';
-import prisma from 'prisma/prismaClient';
-import { compare } from 'bcryptjs';
-import Providers from 'next-auth/providers';
-import NextAuth from 'next-auth';
-import { Inputs } from 'types/Inputs';
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { verifyPassword } from "lib/auth";
+import prisma from "prisma/prismaClient";
+import Providers from "next-auth/providers";
+import NextAuth from "next-auth";
+import { Inputs } from "types/Inputs";
 
 export default NextAuth({
   session: {
@@ -26,11 +25,9 @@ export default NextAuth({
           credentials.password,
           user.password
         );
-        console.log(credentials.password);
-        console.log(user.password);
 
         if (!isValid) {
-          throw new Error('Could not log you in!');
+          throw new Error("Could not log you in!");
         }
 
         return {
@@ -41,3 +38,4 @@ export default NextAuth({
     })
   ]
 });
+

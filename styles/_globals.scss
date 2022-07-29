@@ -1,5 +1,5 @@
-@use 'variables' as *;
-@use 'mixins' as *;
+@use "variables" as *;
+@use "mixins" as *;
 
 * {
   box-sizing: border-box;
@@ -35,6 +35,10 @@ ul {
 button:focus {
   outline-offset: 5px;
   outline: 3px dotted $clr-red;
+}
+
+.section-loading {
+  padding-top: 10rem;
 }
 
 ::-webkit-scrollbar {

@@ -1,13 +1,13 @@
-import { useToggleBookmarksMutation } from 'app/movie.api';
-import clsx from 'clsx';
-import Image from 'next/image';
-import { useCallback, useEffect } from 'react';
-import { toast } from 'react-toastify';
-import { TMovie } from 'types/movies';
-import BookmarkBtn from './BookmarkBtn';
-import Description from './Description';
-import classes from './Movie.module.scss';
-import PlayBtn from './PlayBtn';
+import { useToggleBookmarksMutation } from "app/movie.api";
+import clsx from "clsx";
+import Image from "next/image";
+import { useCallback, useEffect } from "react";
+import { toast } from "react-toastify";
+import { TMovie } from "types/movies";
+import BookmarkBtn from "./BookmarkBtn";
+import Description from "./Description";
+import classes from "./Movie.module.scss";
+import PlayBtn from "./PlayBtn";
 
 type MovieProps = {
   movie: TMovie;
@@ -45,10 +45,10 @@ const Movie = ({ movie, trending }: MovieProps) => {
       <BookmarkBtn
         bookmarked={movie.isBookmarked}
         onBookmark={handleBookmark}
-        movieTitle={movie.title}
         className={`${classes.movie__bookmark} ${
-          trending ? classes.bookmark__trending : ''
+          trending ? classes.bookmark__trending : ""
         }`}
+        isLoading={isLoading}
       />
       <div className={movieImageClasses}>
         <Image
@@ -76,3 +76,4 @@ const Movie = ({ movie, trending }: MovieProps) => {
   );
 };
 export default Movie;
+

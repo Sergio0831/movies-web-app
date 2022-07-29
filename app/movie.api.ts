@@ -5,12 +5,14 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 export const movieApi = createApi({
   reducerPath: "movieApi",
   baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
-  tagTypes: ["Movie"],
+  tagTypes: ["Movie", "User"],
   endpoints: (build) => ({
     getMovies: build.query<TMovie[], void>({
       query: () => ({
         url: "/movies"
-      }),
+      })
+    }),
+    getMoviesByCategory: build.query<TMovie[], string>({
       query: (category) => ({
         url: `/${category}`
       })
@@ -50,7 +52,8 @@ export const movieApi = createApi({
         url: "/auth/signup",
         method: "POST",
         body: data
-      })
+      }),
+      invalidatesTags: ["User"]
     })
   })
 });

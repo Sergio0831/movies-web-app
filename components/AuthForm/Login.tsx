@@ -1,16 +1,16 @@
-import clsx from 'clsx';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { Inputs } from 'types/Inputs';
-import Form from './Form';
-import classes from './AuthForm.module.scss';
-import { useEffect, useState } from 'react';
-import Label from './Label';
-import ErrorMessage from './ErrorMessage';
-import { Button } from '../ui';
-import FormFooter from './FormFooter';
-import { useRouter } from 'next/router';
-import { signIn } from 'next-auth/client';
-import { Loading } from '../icons';
+import clsx from "clsx";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { Inputs } from "types/Inputs";
+import Form from "./Form";
+import classes from "./AuthForm.module.scss";
+import { useEffect, useState } from "react";
+import Label from "./Label";
+import ErrorMessage from "./ErrorMessage";
+import { Button } from "../ui";
+import FormFooter from "./FormFooter";
+import { useRouter } from "next/router";
+import { signIn } from "next-auth/client";
+import { Loading } from "../icons";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,36 +21,36 @@ const Login = () => {
     formState: { errors },
     setFocus,
     setError
-  } = useForm<Inputs>({ mode: 'onChange' });
+  } = useForm<Inputs>({ mode: "onChange" });
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const { email, password } = data;
     setIsLoading(true);
-    const result = await signIn('credentials', {
+    const result = await signIn("credentials", {
       redirect: false,
       email,
       password
     });
 
     if (result.error) {
-      setError('email', {
+      setError("email", {
         message: result.error
       });
       setIsLoading(false);
     }
 
     if (!result.error) {
-      router.replace('/');
+      router.replace("/");
       setIsLoading(false);
     }
   };
 
   const inputClasses = clsx({
-    'body-m': true,
+    "body-m": true,
     [classes.input]: true
   });
 
   useEffect(() => {
-    setFocus('email');
+    setFocus("email");
   }, [setFocus]);
 
   return (
@@ -59,11 +59,11 @@ const Login = () => {
         <input
           type='email'
           id='email'
-          {...register('email', {
+          {...register("email", {
             required: "Can't be empty",
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: 'Wrong format'
+              message: "Wrong format"
             }
           })}
           placeholder='Email address'
@@ -75,7 +75,7 @@ const Login = () => {
         <input
           type='password'
           id='password'
-          {...register('password', {
+          {...register("password", {
             required: "Can't be empty"
           })}
           placeholder='Password'
@@ -89,9 +89,9 @@ const Login = () => {
       </Label>
       <Button type='submit' className='btn-fill'>
         {isLoading ? (
-          <Loading height='2rem' width='2rem' stroke='#fff' />
+          <Loading height='2rem' width='2rem' />
         ) : (
-          'Login to your account'
+          "Login to your account"
         )}
       </Button>
       <FormFooter
@@ -103,3 +103,4 @@ const Login = () => {
   );
 };
 export default Login;
+

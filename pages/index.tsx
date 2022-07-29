@@ -1,17 +1,17 @@
-import { Loading } from '@/components/icons';
-import { Grid, Main } from '@/components/layout';
-import { Movies, Trending } from '@/components/sections';
-import { Movie, SearchForm, SEO } from '@/components/ui';
-import { useGetMoviesQuery } from 'app/movie.api';
-import List from 'generics/List';
-import useSearch from 'hooks/useSearch';
-import type { GetServerSideProps, NextPage } from 'next';
-import { getSession } from 'next-auth/client';
-import { TMovie } from 'types/movies';
+import { Loading } from "@/components/icons";
+import { Grid, Main } from "@/components/layout";
+import { Movies, SectionLoading, Trending } from "@/components/sections";
+import { Movie, SearchForm, SEO } from "@/components/ui";
+import { useGetMoviesQuery } from "app/movie.api";
+import List from "generics/List";
+import useSearch from "hooks/useSearch";
+import type { GetServerSideProps, NextPage } from "next";
+import { getSession } from "next-auth/client";
+import { TMovie } from "types/movies";
 
 const Home: NextPage = () => {
   const { data, isSuccess, isLoading: loading } = useGetMoviesQuery();
-  const { onChange, searchQuery, isLoading, movies } = useSearch<TMovie>(data);
+  const { onChange, searchQuery, isLoading, movies } = useSearch();
 
   const trendingMovies = isSuccess && data.filter((movie) => movie.isTrending);
   const recommended = isSuccess && data.filter((movie) => !movie.isTrending);
@@ -29,10 +29,10 @@ const Home: NextPage = () => {
           search={searchQuery}
         />
         {isLoading && searchQuery ? (
-          <Loading />
+          <SectionLoading />
         ) : (
           <>
-            {loading && <Loading />}
+            {loading && <SectionLoading />}
             {isSuccess && (
               <>
                 {!searchQuery && (
@@ -47,7 +47,7 @@ const Home: NextPage = () => {
                   title={
                     searchQuery.length > 0
                       ? `Found ${movies.length} results for `
-                      : 'Recommendet for you'
+                      : "Recommendet for you"
                   }
                 >
                   <Grid>
@@ -76,7 +76,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!session) {
     return {
       redirect: {
-        destination: '/login',
+        destination: "/login",
         permanent: false
       }
     };

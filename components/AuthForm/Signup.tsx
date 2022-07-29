@@ -2,7 +2,7 @@ import { useSignupUserMutation } from "app/movie.api";
 import axios, { AxiosError } from "axios";
 import clsx from "clsx";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Inputs } from "types/Inputs";
 import { Loading } from "../icons";
@@ -14,9 +14,10 @@ import FormFooter from "./FormFooter";
 import Label from "./Label";
 
 const Signup = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
-  const [signUp, { isSuccess, error, isError, isLoading }] =
-    useSignupUserMutation();
+  // const [signUp, { isSuccess, error, isError, isLoading }] =
+  //   useSignupUserMutation();
   const {
     register,
     handleSubmit,
@@ -28,36 +29,38 @@ const Signup = () => {
   } = useForm<Inputs>({ mode: "onChange" });
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const { email, password, passwordMatch } = data;
-    await signUp({ email, password, passwordMatch });
-    if (isSuccess) {
-      router.push("/login");
-      reset();
-    }
-
-    // try {
-    //   const response = await axios.post(
-    //     '/api/auth/signup',
-    //     {
-    //       email,
-    //       password,
-    //       passwordMatch
-    //     },
-    //     {
-    //       headers: { 'Content-Type': 'application/json' }
-    //     }
-    //   );
-    //   router.replace('/');
+    // await signUp({ email, password, passwordMatch });
+    // if (isSuccess) {
+    //   router.push("/login");
     //   reset();
-    // } catch (error) {
-    //   const err = error as AxiosError;
-    //   if (err.response) {
-    //     console.log(err.response.status);
-    //     console.log(err.response.data);
-    //     setError('email', {
-    //       message: 'User exist!'
-    //     });
-    //   }
     // }
+    setIsLoading(true);
+    try {
+      const response = await axios.post(
+        "/api/auth/signup",
+        {
+          email,
+          password,
+          passwordMatch
+        },
+        {
+          headers: { "Content-Type": "application/json" }
+        }
+      );
+      setIsLoading(false);
+      router.replace("/");
+      reset();
+    } catch (error) {
+      const err = error as AxiosError;
+      if (err.response) {
+        console.log(err.response.status);
+        console.log(err.response.data);
+        setError("email", {
+          message: "User exist!"
+        });
+        setIsLoading(false);
+      }
+    }
   };
 
   const inputClasses = clsx({
@@ -69,13 +72,13 @@ const Signup = () => {
     setFocus("email");
   }, [setFocus]);
 
-  useEffect(() => {
-    if (isError) {
-      setError("email", {
-        message: (error as any).data.message
-      });
-    }
-  }, [isError]);
+  // useEffect(() => {
+  //   if (isError) {
+  //     setError("email", {
+  //       message: (error as any).data.message
+  //     });
+  //   }
+  // }, [isError]);
 
   return (
     <Form title='Sign Up' onSubmit={handleSubmit(onSubmit)}>
@@ -137,7 +140,7 @@ const Signup = () => {
         disabled={isLoading ? true : false}
       >
         {isLoading ? (
-          <Loading height='2rem' width='2rem' stroke='#fff' />
+          <Loading height='2rem' width='2rem' />
         ) : (
           "Create an account"
         )}

@@ -1,18 +1,18 @@
-import { Loading } from '@/components/icons';
-import { Grid, Main } from '@/components/layout';
-import { Movies } from '@/components/sections';
-import { Movie, SearchForm } from '@/components/ui';
-import { useGetBookmarkedMoviesQuery } from 'app/movie.api';
-import List from 'generics/List';
-import useSearch from 'hooks/useSearch';
-import { GetServerSideProps } from 'next';
-import { getSession } from 'next-auth/client';
-import { TMovie } from 'types/movies';
+import { Loading } from "@/components/icons";
+import { Grid, Main } from "@/components/layout";
+import { Movies, SectionLoading } from "@/components/sections";
+import { Movie, SearchForm } from "@/components/ui";
+import { useGetBookmarkedMoviesQuery } from "app/movie.api";
+import List from "generics/List";
+import useSearch from "hooks/useSearch";
+import { GetServerSideProps } from "next";
+import { getSession } from "next-auth/client";
+import { TMovie } from "types/movies";
 
 const BookmarksPage = () => {
   const { data, isSuccess, isLoading: loading } = useGetBookmarkedMoviesQuery();
 
-  const { onChange, searchQuery, isLoading, movies } = useSearch(data);
+  const { onChange, searchQuery, isLoading, movies } = useSearch();
 
   const moviesByCategories =
     isSuccess &&
@@ -35,7 +35,7 @@ const BookmarksPage = () => {
       />
       {searchQuery ? (
         isLoading && searchQuery ? (
-          <Loading />
+          <SectionLoading />
         ) : (
           <Movies
             searchQuery={searchQuery}
@@ -54,7 +54,7 @@ const BookmarksPage = () => {
         )
       ) : (
         <>
-          {loading && <Loading />}
+          {loading && <SectionLoading />}
           <section>
             {isSuccess && (
               <>
@@ -105,7 +105,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!session) {
     return {
       redirect: {
-        destination: '/login',
+        destination: "/login",
         permanent: false
       }
     };
@@ -117,3 +117,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 export default BookmarksPage;
+

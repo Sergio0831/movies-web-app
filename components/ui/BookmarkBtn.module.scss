@@ -1,5 +1,5 @@
-@use '@/styles/variables' as *;
-@use '@/styles/mixins' as *;
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
 
 .bookmark {
   @include flex($align-items: $center, $justify-content: $center);
@@ -28,6 +28,18 @@
           stroke: $clr-dark-blue;
         }
       }
+
+      .bookmark__loading {
+        circle {
+          stroke: $clr-dark-blue;
+        }
+      }
+    }
+  }
+
+  &__loading {
+    circle {
+      stroke: $clr-white;
     }
   }
 
@@ -39,3 +51,4 @@
     }
   }
 }
+

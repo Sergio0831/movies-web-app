@@ -1,26 +1,23 @@
-import { Loading } from '@/components/icons';
-import { Main } from '@/components/layout';
-import Grid from '@/components/layout/Grid';
-import { Movies } from '@/components/sections';
-import { SearchForm } from '@/components/ui';
-import Movie from '@/components/ui/Movie';
-import { useGetMoviesByCategoryQuery } from 'app/movie.api';
-import List from 'generics/List';
-import useSearch from 'hooks/useSearch';
-import { GetServerSideProps } from 'next';
-import { getSession } from 'next-auth/client';
-import { TMovie } from 'types/movies';
+import { Loading } from "@/components/icons";
+import { Main } from "@/components/layout";
+import Grid from "@/components/layout/Grid";
+import { Movies, SectionLoading } from "@/components/sections";
+import { SearchForm } from "@/components/ui";
+import Movie from "@/components/ui/Movie";
+import { useGetMoviesByCategoryQuery } from "app/movie.api";
+import List from "generics/List";
+import useSearch from "hooks/useSearch";
+import { GetServerSideProps } from "next";
+import { getSession } from "next-auth/client";
+import { TMovie } from "types/movies";
 
 const TvSeriesPage = () => {
   const {
     data,
     isSuccess,
     isLoading: loading
-  } = useGetMoviesByCategoryQuery('TV Series');
-  const { onChange, movies, searchQuery, isLoading } = useSearch<TMovie>(
-    data,
-    'TV Series'
-  );
+  } = useGetMoviesByCategoryQuery("TV Series");
+  const { onChange, movies, searchQuery, isLoading } = useSearch("TV Series");
 
   return (
     <Main>
@@ -30,17 +27,17 @@ const TvSeriesPage = () => {
         search={searchQuery}
       />
       {isLoading && searchQuery ? (
-        <Loading />
+        <SectionLoading />
       ) : (
         <>
-          {loading && <Loading />}
+          {loading && <SectionLoading />}
           {isSuccess && (
             <Movies
               searchQuery={searchQuery}
               title={
                 searchQuery.length > 0
                   ? `Found ${movies.length} results for `
-                  : 'TV Series'
+                  : "TV Series"
               }
               aria-labelledby='TV Series'
             >
@@ -68,7 +65,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!session) {
     return {
       redirect: {
-        destination: '/login',
+        destination: "/login",
         permanent: false
       }
     };
@@ -80,3 +77,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 export default TvSeriesPage;
+
