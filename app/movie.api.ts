@@ -1,14 +1,15 @@
-import { TMovie } from 'types/movies';
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
+import { NewUser } from "./../types/user";
+import { TMovie } from "types/movies";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
 export const movieApi = createApi({
-  reducerPath: 'movieApi',
-  baseQuery: fetchBaseQuery({ baseUrl: '/api' }),
-  tagTypes: ['Movie'],
+  reducerPath: "movieApi",
+  baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
+  tagTypes: ["Movie"],
   endpoints: (build) => ({
     getMovies: build.query<TMovie[], void>({
       query: () => ({
-        url: '/movies'
+        url: "/movies"
       })
     }),
     getMoviesByCategory: build.query<TMovie[], string>({
@@ -18,28 +19,28 @@ export const movieApi = createApi({
     }),
     getBookmarkedMovies: build.query<TMovie[], void>({
       query: () => ({
-        url: '/bookmarkedMovies'
+        url: "/bookmarkedMovies"
       }),
-      providesTags: ['Movie']
+      providesTags: ["Movie"]
     }),
     toggleBookmarks: build.mutation<
       TMovie,
       { id: string; isBookmarked: boolean }
     >({
       query: ({ id, isBookmarked }) => ({
-        url: '/bookmarks',
-        method: 'PATCH',
+        url: "/bookmarks",
+        method: "PATCH",
         body: { id, isBookmarked }
       }),
-      invalidatesTags: ['Movie']
+      invalidatesTags: ["Movie"]
     }),
     searchMovies: build.mutation<
       TMovie[],
       { searchQuery: string; category?: string }
     >({
       query: ({ searchQuery, category }) => ({
-        url: '/search',
-        method: 'POST',
+        url: "/search",
+        method: "POST",
         body: { searchQuery, category }
       })
     })
@@ -53,3 +54,4 @@ export const {
   useToggleBookmarksMutation,
   useSearchMoviesMutation
 } = movieApi;
+

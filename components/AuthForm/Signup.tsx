@@ -1,62 +1,60 @@
-import axios, { AxiosError } from 'axios';
-import clsx from 'clsx';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { Inputs } from 'types/Inputs';
-import { Button } from '../ui';
-import classes from './AuthForm.module.scss';
-import ErrorMessage from './ErrorMessage';
-import Form from './Form';
-import FormFooter from './FormFooter';
-import Label from './Label';
+import axios, { AxiosError } from "axios";
+import clsx from "clsx";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { Inputs } from "types/Inputs";
+import { Button } from "../ui";
+import classes from "./AuthForm.module.scss";
+import ErrorMessage from "./ErrorMessage";
+import Form from "./Form";
+import FormFooter from "./FormFooter";
+import Label from "./Label";
 
 const Signup = () => {
   const router = useRouter();
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
     setFocus,
     getValues,
     reset,
     setError
-  } = useForm<Inputs>({ mode: 'onChange' });
+  } = useForm<Inputs>({ mode: "onChange" });
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const { email, password, passwordMatch } = data;
     try {
-      const response = await axios.post(
-        '/api/auth/signup',
+      await axios.post(
+        "/api/auth/signup",
         {
           email,
           password,
           passwordMatch
         },
         {
-          headers: { 'Content-Type': 'application/json' }
+          headers: { "Content-Type": "application/json" }
         }
       );
-      router.replace('/');
+      router.replace("/");
       reset();
     } catch (error) {
       const err = error as AxiosError;
       if (err.response) {
-        console.log(err.response.status);
-        console.log(err.response.data);
-        setError('email', {
-          message: 'User exist!'
+        setError("email", {
+          message: "User exist!"
         });
       }
     }
   };
 
   const inputClasses = clsx({
-    'body-m': true,
+    "body-m": true,
     [classes.input]: true
   });
 
   useEffect(() => {
-    setFocus('email');
+    setFocus("email");
   }, [setFocus]);
 
   return (
@@ -65,11 +63,11 @@ const Signup = () => {
         <input
           type='email'
           id='email'
-          {...register('email', {
+          {...register("email", {
             required: "Can't be empty",
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: 'Wrong format'
+              message: "Wrong format"
             }
           })}
           placeholder='Email address'
@@ -81,7 +79,7 @@ const Signup = () => {
         <input
           type='password'
           id='password'
-          {...register('password', {
+          {...register("password", {
             required: "Can't be empty"
           })}
           placeholder='Password'
@@ -97,11 +95,11 @@ const Signup = () => {
         <input
           type='password'
           id='passwordMatch'
-          {...register('passwordMatch', {
+          {...register("passwordMatch", {
             required: "Can't be empty",
             validate: (value) => {
               const { password } = getValues();
-              return password === value || 'Passwords should match!';
+              return password === value || "Passwords should match!";
             }
           })}
           placeholder='Repeat password'
@@ -125,3 +123,4 @@ const Signup = () => {
   );
 };
 export default Signup;
+
