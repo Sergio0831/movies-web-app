@@ -1,59 +1,61 @@
-import { Loading } from "@/components/icons";
-import { Main } from "@/components/layout";
-import Grid from "@/components/layout/Grid";
-import { Movies, SectionLoading } from "@/components/sections";
-import { SearchForm } from "@/components/ui";
-import Movie from "@/components/ui/Movie";
-import { useGetMoviesByCategoryQuery } from "app/movie.api";
-import List from "generics/List";
-import useSearch from "hooks/useSearch";
-import { GetServerSideProps } from "next";
-import { getSession } from "next-auth/client";
-import { TMovie } from "types/movies";
+import { Loading } from '@/components/icons';
+import { Container, Main } from '@/components/layout';
+import Grid from '@/components/layout/Grid';
+import { Movies, SectionLoading } from '@/components/sections';
+import { SearchForm } from '@/components/ui';
+import Movie from '@/components/ui/Movie';
+import { useGetMoviesByCategoryQuery } from 'app/movie.api';
+import List from 'generics/List';
+import useSearch from 'hooks/useSearch';
+import { GetServerSideProps } from 'next';
+import { getSession } from 'next-auth/client';
+import { TMovie } from 'types/movies';
 
 const MoviesPage = () => {
   const {
     data,
     isSuccess,
     isLoading: loading
-  } = useGetMoviesByCategoryQuery("Movie");
-  const { onChange, searchQuery, isLoading, movies } = useSearch("Movie");
+  } = useGetMoviesByCategoryQuery('Movie');
+  const { onChange, searchQuery, isLoading, movies } = useSearch('Movie');
 
   return (
-    <Main>
-      <SearchForm
-        placeholder='movies'
-        onSearch={onChange}
-        search={searchQuery}
-      />
-      {isLoading && searchQuery ? (
-        <SectionLoading />
-      ) : (
-        <>
-          {loading && <SectionLoading />}
-          {isSuccess && (
-            <Movies
-              searchQuery={searchQuery}
-              title={
-                searchQuery.length > 0
-                  ? `Found ${movies.length} results for `
-                  : "Movie"
-              }
-              aria-labelledby='Movies'
-            >
-              <Grid>
-                <List
-                  items={searchQuery ? movies : data}
-                  renderItem={(movie: TMovie) => (
-                    <Movie key={movie.id} movie={movie} />
-                  )}
-                />
-              </Grid>
-            </Movies>
-          )}
-        </>
-      )}
-    </Main>
+    <Container>
+      <Main>
+        <SearchForm
+          placeholder='movies'
+          onSearch={onChange}
+          search={searchQuery}
+        />
+        {isLoading && searchQuery ? (
+          <SectionLoading />
+        ) : (
+          <>
+            {loading && <SectionLoading />}
+            {isSuccess && (
+              <Movies
+                searchQuery={searchQuery}
+                title={
+                  searchQuery.length > 0
+                    ? `Found ${movies.length} results for `
+                    : 'Movie'
+                }
+                aria-labelledby='Movies'
+              >
+                <Grid>
+                  <List
+                    items={searchQuery ? movies : data}
+                    renderItem={(movie: TMovie) => (
+                      <Movie key={movie.id} movie={movie} />
+                    )}
+                  />
+                </Grid>
+              </Movies>
+            )}
+          </>
+        )}
+      </Main>
+    </Container>
   );
 };
 
@@ -65,7 +67,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!session) {
     return {
       redirect: {
-        destination: "/login",
+        destination: '/login',
         permanent: false
       }
     };
@@ -77,4 +79,3 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 export default MoviesPage;
-

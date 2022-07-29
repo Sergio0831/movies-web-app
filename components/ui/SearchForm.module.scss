@@ -2,8 +2,7 @@
 @use '@/styles/mixins' as *;
 
 .form {
-  grid-area: form;
-  padding-top: $padding * 1.7;
+  padding: $padding * 1.7 $padding * 3.6 0 $padding * 3.6;
 
   label {
     display: flex;

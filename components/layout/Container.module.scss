@@ -1,0 +1,14 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/breakpoints' as *;
+
+.container {
+  display: $d-grid;
+  grid-template-columns: 1fr;
+  padding-top: $padding * 3.2;
+
+  @include tablet {
+    grid-template-columns: auto 1fr;
+    padding-top: $padding * 3.2;
+  }
+}

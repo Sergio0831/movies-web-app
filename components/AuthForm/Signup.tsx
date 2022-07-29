@@ -1,17 +1,16 @@
-import { useSignupUserMutation } from "app/movie.api";
-import axios, { AxiosError } from "axios";
-import clsx from "clsx";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { Inputs } from "types/Inputs";
-import { Loading } from "../icons";
-import { Button } from "../ui";
-import classes from "./AuthForm.module.scss";
-import ErrorMessage from "./ErrorMessage";
-import Form from "./Form";
-import FormFooter from "./FormFooter";
-import Label from "./Label";
+import axios, { AxiosError } from 'axios';
+import clsx from 'clsx';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { Inputs } from 'types/Inputs';
+import { Loading } from '../icons';
+import { Button } from '../ui';
+import classes from './AuthForm.module.scss';
+import ErrorMessage from './ErrorMessage';
+import Form from './Form';
+import FormFooter from './FormFooter';
+import Label from './Label';
 
 const Signup = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,37 +25,32 @@ const Signup = () => {
     getValues,
     reset,
     setError
-  } = useForm<Inputs>({ mode: "onChange" });
+  } = useForm<Inputs>({ mode: 'onChange' });
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const { email, password, passwordMatch } = data;
-    // await signUp({ email, password, passwordMatch });
-    // if (isSuccess) {
-    //   router.push("/login");
-    //   reset();
-    // }
     setIsLoading(true);
     try {
       const response = await axios.post(
-        "/api/auth/signup",
+        '/api/auth/signup',
         {
           email,
           password,
           passwordMatch
         },
         {
-          headers: { "Content-Type": "application/json" }
+          headers: { 'Content-Type': 'application/json' }
         }
       );
       setIsLoading(false);
-      router.replace("/");
+      router.replace('/');
       reset();
     } catch (error) {
       const err = error as AxiosError;
       if (err.response) {
         console.log(err.response.status);
         console.log(err.response.data);
-        setError("email", {
-          message: "User exist!"
+        setError('email', {
+          message: 'User exist!'
         });
         setIsLoading(false);
       }
@@ -64,21 +58,13 @@ const Signup = () => {
   };
 
   const inputClasses = clsx({
-    "body-m": true,
+    'body-m': true,
     [classes.input]: true
   });
 
   useEffect(() => {
-    setFocus("email");
+    setFocus('email');
   }, [setFocus]);
-
-  // useEffect(() => {
-  //   if (isError) {
-  //     setError("email", {
-  //       message: (error as any).data.message
-  //     });
-  //   }
-  // }, [isError]);
 
   return (
     <Form title='Sign Up' onSubmit={handleSubmit(onSubmit)}>
@@ -86,11 +72,11 @@ const Signup = () => {
         <input
           type='email'
           id='email'
-          {...register("email", {
+          {...register('email', {
             required: "Can't be empty",
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "Wrong format"
+              message: 'Wrong format'
             }
           })}
           placeholder='Email address'
@@ -102,7 +88,7 @@ const Signup = () => {
         <input
           type='password'
           id='password'
-          {...register("password", {
+          {...register('password', {
             required: "Can't be empty"
           })}
           placeholder='Password'
@@ -118,11 +104,11 @@ const Signup = () => {
         <input
           type='password'
           id='passwordMatch'
-          {...register("passwordMatch", {
+          {...register('passwordMatch', {
             required: "Can't be empty",
             validate: (value) => {
               const { password } = getValues();
-              return password === value || "Passwords should match!";
+              return password === value || 'Passwords should match!';
             }
           })}
           placeholder='Repeat password'
@@ -142,7 +128,7 @@ const Signup = () => {
         {isLoading ? (
           <Loading height='2rem' width='2rem' />
         ) : (
-          "Create an account"
+          'Create an account'
         )}
       </Button>
       <FormFooter
@@ -154,4 +140,3 @@ const Signup = () => {
   );
 };
 export default Signup;
-

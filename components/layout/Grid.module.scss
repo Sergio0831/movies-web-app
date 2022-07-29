@@ -4,7 +4,7 @@
 
 .grid {
   display: $d-grid;
-  grid-template-columns: repeat(auto-fill, minmax(21rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
   column-gap: $gap * 1.5;
   row-gap: $gap * 1.6;
   padding-top: $padding * 2.4;

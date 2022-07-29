@@ -1,13 +1,13 @@
-import { Loading } from "@/components/icons";
-import { Grid, Main } from "@/components/layout";
-import { Movies, SectionLoading, Trending } from "@/components/sections";
-import { Movie, SearchForm, SEO } from "@/components/ui";
-import { useGetMoviesQuery } from "app/movie.api";
-import List from "generics/List";
-import useSearch from "hooks/useSearch";
-import type { GetServerSideProps, NextPage } from "next";
-import { getSession } from "next-auth/client";
-import { TMovie } from "types/movies";
+import { Loading } from '@/components/icons';
+import { Container, Grid, Main } from '@/components/layout';
+import { Movies, SectionLoading, Trending } from '@/components/sections';
+import { Movie, SearchForm, SEO } from '@/components/ui';
+import { useGetMoviesQuery } from 'app/movie.api';
+import List from 'generics/List';
+import useSearch from 'hooks/useSearch';
+import type { GetServerSideProps, NextPage } from 'next';
+import { getSession } from 'next-auth/client';
+import { TMovie } from 'types/movies';
 
 const Home: NextPage = () => {
   const { data, isSuccess, isLoading: loading } = useGetMoviesQuery();
@@ -22,48 +22,50 @@ const Home: NextPage = () => {
         title='Entertainment Web App'
         description='Unlimited films, TV programmes and more.'
       />
-      <Main searchQuery={searchQuery}>
-        <SearchForm
-          placeholder='movies or TV series'
-          onSearch={onChange}
-          search={searchQuery}
-        />
-        {isLoading && searchQuery ? (
-          <SectionLoading />
-        ) : (
-          <>
-            {loading && <SectionLoading />}
-            {isSuccess && (
-              <>
-                {!searchQuery && (
-                  <Trending
-                    trendingMovies={trendingMovies}
-                    aria-labelledby='Trending Shows'
-                  />
-                )}
-                <Movies
-                  aria-labelledby='Recomendet for you'
-                  searchQuery={searchQuery}
-                  title={
-                    searchQuery.length > 0
-                      ? `Found ${movies.length} results for `
-                      : "Recommendet for you"
-                  }
-                >
-                  <Grid>
-                    <List
-                      items={searchQuery ? movies : recommended}
-                      renderItem={(movie: TMovie) => (
-                        <Movie key={movie.id} movie={movie} />
-                      )}
+      <Container>
+        <Main>
+          <SearchForm
+            placeholder='movies or TV series'
+            onSearch={onChange}
+            search={searchQuery}
+          />
+          {isLoading && searchQuery ? (
+            <SectionLoading />
+          ) : (
+            <>
+              {loading && <SectionLoading />}
+              {isSuccess && (
+                <>
+                  {!searchQuery && (
+                    <Trending
+                      trendingMovies={trendingMovies}
+                      aria-labelledby='Trending Shows'
                     />
-                  </Grid>
-                </Movies>
-              </>
-            )}
-          </>
-        )}
-      </Main>
+                  )}
+                  <Movies
+                    aria-labelledby='Recomendet for you'
+                    searchQuery={searchQuery}
+                    title={
+                      searchQuery.length > 0
+                        ? `Found ${movies.length} results for `
+                        : 'Recommendet for you'
+                    }
+                  >
+                    <Grid>
+                      <List
+                        items={searchQuery ? movies : recommended}
+                        renderItem={(movie: TMovie) => (
+                          <Movie key={movie.id} movie={movie} />
+                        )}
+                      />
+                    </Grid>
+                  </Movies>
+                </>
+              )}
+            </>
+          )}
+        </Main>
+      </Container>
     </>
   );
 };
@@ -76,7 +78,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!session) {
     return {
       redirect: {
-        destination: "/login",
+        destination: '/login',
         permanent: false
       }
     };
@@ -88,4 +90,3 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 export default Home;
-

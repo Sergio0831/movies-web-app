@@ -1,0 +1,7 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/breakpoints' as *;
+
+.header {
+  padding-left: $padding * 3.2;
+}

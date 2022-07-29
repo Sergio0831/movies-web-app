@@ -1,26 +1,14 @@
-import Nav from './Nav';
 import classes from './Main.module.scss';
-import clsx from 'clsx';
-import { useRouter } from 'next/router';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 type MainProps = {
   children?: React.ReactNode;
-  searchQuery?: string;
 };
 
-const Main = ({ children, searchQuery }: MainProps) => {
-  const router = useRouter();
-
-  const mainClasses = clsx({
-    [classes.main]: true,
-    [classes.main__home]: router.pathname === '/' && !searchQuery
-  });
-
+const Main = ({ children }: MainProps) => {
   return (
-    <main className={mainClasses}>
-      <Nav />
+    <main className={classes.main}>
       {children}
       <ToastContainer
         position='top-right'

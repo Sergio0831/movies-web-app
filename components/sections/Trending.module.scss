@@ -2,13 +2,14 @@
 @use '@/styles/mixins' as *;
 
 .trending {
-  grid-area: trending;
   overflow: hidden;
+  padding-left: $padding * 3.6;
 
   &__container {
     @include flex;
 
     padding-top: $padding * 2.5;
+
     column-gap: $gap * 4;
   }
 }
