@@ -1,8 +1,9 @@
 import { Signup } from "@/components/AuthForm";
 import { Loading } from "@/components/icons";
 import AuthSection from "@/components/sections/AuthSection";
+import { SEO } from "@/components/ui";
 import { NextPage } from "next";
-import { getSession } from "next-auth/client";
+import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -29,9 +30,14 @@ const SignupPage: NextPage = () => {
   }
 
   return (
-    <AuthSection aria-labelledby='Signup'>
-      <Signup />
-    </AuthSection>
+    <>
+      <SEO title='Registration' />
+      <main>
+        <AuthSection aria-labelledby='Signup'>
+          <Signup />
+        </AuthSection>
+      </main>
+    </>
   );
 };
 

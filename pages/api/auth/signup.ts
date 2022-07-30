@@ -1,33 +1,32 @@
-import { hashPassword } from 'lib/auth';
-import type { NextApiRequest, NextApiResponse } from 'next';
-import prisma from 'prisma/prismaClient';
-import { Inputs } from 'types/Inputs';
+import { hashPassword } from "lib/auth";
+import type { NextApiRequest, NextApiResponse } from "next";
+import prisma from "prisma/prismaClient";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method === 'POST') {
+  if (req.method === "POST") {
     const data = req.body;
     const { email, password, passwordMatch } = data;
 
     if (
       !email ||
-      !email.includes('@') ||
+      !email.includes("@") ||
       !password ||
       !passwordMatch ||
       password !== passwordMatch
     ) {
       res
         .status(422)
-        .json({ message: 'Invalid input - passwords should match' });
+        .json({ message: "Invalid input - passwords should match" });
       return;
     }
 
     const existingUser = await prisma.user.findUnique({ where: { email } });
 
     if (existingUser) {
-      res.status(422).json({ message: 'User exist!' });
+      res.status(422).json({ message: "User exist!" });
       prisma.$disconnect();
       return;
     }
@@ -43,7 +42,7 @@ export default async function handler(
       }
     });
 
-    res.status(201).json({ message: 'User created!' });
+    res.status(201).json({ message: "User created!" });
     prisma.$disconnect();
   }
 }

@@ -1,9 +1,9 @@
-import { navLinks } from '@/data/navLink';
-import { signOut } from 'next-auth/client';
-import { Logo } from '../icons';
-import { Avatar, Button } from '../ui';
-import { useRouter } from 'next/router';
-import classes from './Nav.module.scss';
+import { navLinks } from "@/data/navLink";
+import { signOut } from "next-auth/react";
+import { Logo } from "../icons";
+import { Avatar, Button } from "../ui";
+import { useRouter } from "next/router";
+import classes from "./Nav.module.scss";
 
 const Nav = () => {
   const router = useRouter();
@@ -23,7 +23,7 @@ const Nav = () => {
                 link={link}
                 className={
                   router.asPath === link
-                    ? classes['nav__links-active']
+                    ? classes["nav__links-active"]
                     : undefined
                 }
               >
@@ -39,9 +39,10 @@ const Nav = () => {
         className={`btn ${classes.nav__avatar}`}
         onClick={() => signOut()}
       >
-        <Avatar avatar={'/assets/image-avatar.png'} />
+        <Avatar avatar={"/assets/image-avatar.png"} />
       </Button>
     </nav>
   );
 };
 export default Nav;
+

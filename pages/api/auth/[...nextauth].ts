@@ -1,17 +1,19 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { verifyPassword } from "lib/auth";
 import prisma from "prisma/prismaClient";
-import Providers from "next-auth/providers";
 import NextAuth from "next-auth";
 import { Inputs } from "types/Inputs";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 export default NextAuth({
   session: {
-    jwt: true
+    strategy: "database"
   },
   adapter: PrismaAdapter(prisma),
   providers: [
-    Providers.Credentials({
+    CredentialsProvider({
+      name: "",
+      credentials: {},
       async authorize(credentials: Inputs) {
         const user = await prisma.user.findUnique({
           where: { email: credentials.email }

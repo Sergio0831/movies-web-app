@@ -1,10 +1,10 @@
-import { Provider as SessionProvider } from 'next-auth/client';
-import type { AppProps } from 'next/app';
-import { Provider } from 'react-redux';
-import '@/styles/main.scss';
-import { store } from 'app/store';
+import { SessionProvider } from "next-auth/react";
+import type { AppProps } from "next/app";
+import { Provider } from "react-redux";
+import "@/styles/main.scss";
+import { store } from "app/store";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <SessionProvider session={pageProps.session}>
       <Provider store={store}>
