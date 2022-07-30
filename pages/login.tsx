@@ -1,10 +1,10 @@
-import { Login } from "@/components/AuthForm";
-import { Loading } from "@/components/icons";
-import { AuthSection } from "@/components/sections";
-import { SEO } from "@/components/ui";
-import { getSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { Login } from '@/components/authForm';
+import { Loading } from '@/components/icons';
+import { AuthSection } from '@/components/sections';
+import { SEO } from '@/components/ui';
+import { getSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -13,7 +13,7 @@ const LoginPage = () => {
   useEffect(() => {
     getSession().then((session) => {
       if (session) {
-        router.replace("/");
+        router.replace('/');
       } else {
         setIsLoading(false);
       }
@@ -41,4 +41,3 @@ const LoginPage = () => {
   );
 };
 export default LoginPage;
-

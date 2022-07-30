@@ -1,5 +1,6 @@
 @use '@/styles/variables' as *;
 @use '@/styles/mixins' as *;
+@use '@/styles/breakpoints' as *;
 
 .movie {
   position: $p-relative;
@@ -7,12 +8,20 @@
   &__image {
     position: $p-relative;
     display: $d-grid;
-    height: 17.4rem;
+    height: 11rem;
     cursor: pointer;
     transition: filter $transition;
     padding: $padding * 1.6;
     border-radius: $border-small;
     overflow: hidden;
+
+    @include mobile {
+      height: 14rem;
+    }
+
+    @include tablet {
+      height: 17.4rem;
+    }
 
     img {
       transition: opacity $transition;
