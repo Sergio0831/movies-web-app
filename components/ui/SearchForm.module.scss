@@ -1,13 +1,26 @@
 @use '@/styles/variables' as *;
 @use '@/styles/mixins' as *;
+@use '@/styles/breakpoints' as *;
 
 .form {
-  padding: $padding * 1.7 $padding * 3.6 0 $padding * 3.6;
+  padding: $padding * 2.4 $padding * 1.6 0 $padding * 1.6;
+
+  @include mobile {
+    padding: $padding * 3.3 $padding * 2.4 0 $padding * 2.4;
+  }
+
+  @include tablet {
+    padding: $padding * 1.7 $padding * 3.6 0 $padding * 3.6;
+  }
 
   label {
     display: flex;
     align-items: center;
-    column-gap: $gap * 2.4;
+    column-gap: $gap * 1.6;
+
+    @include mobile {
+      column-gap: $gap * 2.4;
+    }
   }
 
   button {
@@ -24,8 +37,8 @@
     outline: none;
     color: $clr-white;
     font-family: inherit;
-    padding-bottom: $padding * 1.5;
-    padding-top: $padding * 1.5;
+    padding-bottom: $padding * 0.8;
+    padding-top: $padding * 0.8;
     width: $width-base;
 
     &::placeholder {
@@ -34,6 +47,11 @@
 
     &:focus {
       border-bottom-color: $clr-greyish-blue;
+    }
+
+    @include mobile {
+      padding-bottom: $padding * 1.5;
+      padding-top: $padding * 1.5;
     }
   }
 }

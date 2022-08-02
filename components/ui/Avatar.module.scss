@@ -2,17 +2,7 @@
 @use '@/styles/breakpoints' as *;
 
 .image-container {
-  width: 2.4rem;
-  height: 2.4rem;
+  width: 4rem;
+  height: 4rem;
   position: $p-relative;
-
-  @include mobile {
-    width: 3.2rem;
-    height: 3.2rem;
-  }
-
-  @include tablet {
-    width: 4rem;
-    height: 4rem;
-  }
 }

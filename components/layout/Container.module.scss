@@ -5,7 +5,11 @@
 .container {
   display: $d-grid;
   grid-template-columns: 1fr;
-  padding-top: $padding * 3.2;
+  padding-top: 0;
+
+  @include mobile {
+    padding-top: $padding * 2.3;
+  }
 
   @include tablet {
     grid-template-columns: auto 1fr;

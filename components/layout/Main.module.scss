@@ -6,8 +6,9 @@
   position: relative;
   display: $d-grid;
   grid-template-rows: auto auto 1fr;
-  row-gap: $gap * 3.4;
+  row-gap: $gap * 2.4;
 
-  @include tablet {
+  @include mobile {
+    row-gap: $gap * 3.4;
   }
 }

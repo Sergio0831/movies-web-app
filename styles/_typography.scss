@@ -1,46 +1,71 @@
 @use './variables' as *;
 @use './mixins' as *;
+@use './breakpoints' as *;
 
 .heading-l {
   @include font(
-    $font-size: $fsz-xl,
+    $font-size: 2rem,
     $font-weight: $fw-light,
-    $line-height: $lh-base
+    $line-height: 2.5rem
   );
 
-  letter-spacing: -0.5px;
+  letter-spacing: -0.3px;
+
+  @include mobile {
+    @include font($font-size: $fsz-xl, $line-height: $lh-base);
+
+    letter-spacing: -0.5px;
+  }
 }
 
 .heading-m {
   @include font(
-    $font-size: $fsz-l,
+    $font-size: $fsz-m,
     $font-weight: $fw-light,
     $line-height: $lh-base
   );
+
+  @include mobile {
+    font-size: $fsz-l;
+  }
 }
 
 .heading-s {
   @include font(
-    $font-size: $fsz-l,
+    $font-size: 1.5rem,
     $font-weight: $fw-medium,
-    $line-height: $lh-base
+    $line-height: 1.9rem
   );
+
+  @include mobile {
+    font-size: $fsz-l;
+    line-height: $lh-base;
+  }
 }
 
 .heading-xs {
   @include font(
-    $font-size: $fsz-m,
+    $font-size: $fsz-s,
     $font-weight: $fw-medium,
-    $line-height: $lh-base
+    $line-height: 1.8
   );
+
+  @include mobile {
+    font-size: $fsz-m;
+    line-height: $lh-base;
+  }
 }
 
 .body-m {
   @include font(
-    $font-size: $fsz-s,
+    $font-size: 1.2rem,
     $font-weight: $fw-light,
     $line-height: $lh-base
   );
+
+  @include mobile {
+    font-size: $fsz-s;
+  }
 }
 
 .body-s {

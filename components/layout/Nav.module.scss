@@ -9,7 +9,11 @@
   background-color: $clr-semi-dark-blue;
   width: 100%;
   height: 7.2rem;
-  border-radius: $border-large;
+  border-radius: 0;
+
+  @include mobile {
+    border-radius: $border-large;
+  }
 
   @include tablet {
     display: $d-grid;
@@ -30,6 +34,7 @@
   }
 
   &__logo {
+    @include flex($justify-content: $center);
     margin-bottom: 0;
 
     @include tablet {

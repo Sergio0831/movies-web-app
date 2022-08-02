@@ -1,6 +1,15 @@
 @use '@/styles/variables' as *;
 @use '@/styles/mixins' as *;
+@use '@/styles/breakpoints' as *;
 
 .movies {
-  padding: 0 $padding * 3.6 $padding * 6 $padding * 3.6;
+  padding: 0 $padding * 1.6 $padding * 6 $padding * 1.6;
+
+  @include mobile {
+    padding: 0 $padding * 2.4 $padding * 6 $padding * 2.4;
+  }
+
+  @include tablet {
+    padding: 0 $padding * 3.6 $padding * 6 $padding * 3.6;
+  }
 }

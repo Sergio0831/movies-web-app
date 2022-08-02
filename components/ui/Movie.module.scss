@@ -4,6 +4,7 @@
 
 .movie {
   position: $p-relative;
+  user-select: none;
 
   &__image {
     position: $p-relative;
@@ -53,7 +54,12 @@
   &__bookmark {
     z-index: 5;
 
-    @include absolute($right: 1.6rem, $top: 1.6rem);
+    @include absolute($right: 0.8rem, $top: 0.8rem);
+
+    @include mobile {
+      right: 1.6;
+      top: 1.6;
+    }
   }
 
   &__toast {
@@ -87,16 +93,39 @@
   }
 }
 
+.movie__trending {
+  // width: 47rem;
+  // height: 23rem;
+  flex: 1 0 24rem;
+
+  @include mobile {
+    flex: 1 0 47rem;
+  }
+}
+
 .image__trending {
-  width: 47rem;
-  height: 23rem;
+  // width: 47rem;
+  height: 14rem;
+
+  @include mobile {
+    height: 23rem;
+  }
 }
 
 .bookmark__trending {
-  right: 2.4rem;
+  right: 0.8rem;
+
+  @include mobile {
+    right: 2.4rem;
+  }
 }
 
 .description__trending {
-  @include absolute($bottom: 2.4rem, $left: 2.4rem);
+  @include absolute($bottom: 1.6rem, $left: 1.6rem);
   z-index: 3;
+
+  @include mobile {
+    bottom: 2.4rem;
+    left: 2.4rem;
+  }
 }
