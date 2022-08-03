@@ -4,21 +4,23 @@
 
 .trending {
   overflow: hidden;
-  padding-left: $padding * 1.6;
+  margin-left: $margin * 1.6;
 
   @include mobile {
-    padding-left: $padding * 2.4;
+    margin-left: $margin * 2.4;
   }
 
   @include tablet {
-    padding-left: $padding * 3.6;
+    margin-left: $margin * 3.6;
   }
 
   &__container {
     @include flex;
 
+    width: $width-base;
     padding-top: $padding * 1.6;
     column-gap: $gap * 1.6;
+    transition: transform 1s ease;
 
     @include mobile {
       padding-top: $padding * 2.5;

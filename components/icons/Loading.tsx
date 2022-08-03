@@ -1,16 +1,21 @@
+import clsx from 'clsx';
+
 type LoadingProps = {
-  width?: string;
-  height?: string;
   className?: string;
 };
 
-const Loading = ({ width, height, className }: LoadingProps) => {
+const Loading = ({ className }: LoadingProps) => {
+  const loadingClasses = clsx(
+    {
+      loading: true
+    },
+    className
+  );
+
   return (
     <svg
-      className={className}
-      style={{ margin: "auto", display: "block", shapeRendering: "auto" }}
-      width={width ? width : "8rem"}
-      height={height ? height : "8rem"}
+      className={loadingClasses}
+      style={{ margin: 'auto', display: 'block', shapeRendering: 'auto' }}
       viewBox='0 0 100 100'
       preserveAspectRatio='xMidYMid'
     >
@@ -36,4 +41,3 @@ const Loading = ({ width, height, className }: LoadingProps) => {
   );
 };
 export default Loading;
-

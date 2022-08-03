@@ -1,9 +1,9 @@
-import clsx from "clsx";
-import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import { BookmarkIcon, Loading } from "../icons";
-import classes from "./BookmarkBtn.module.scss";
-import Button from "./Button";
+import clsx from 'clsx';
+import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import { BookmarkIcon, Loading } from '../icons';
+import classes from './BookmarkBtn.module.scss';
+import Button from './Button';
 
 type BookmarkBtnProps = {
   className?: string;
@@ -40,11 +40,7 @@ const BookmarkBtn = ({
       ariaLabel='Bookmark Movie'
     >
       {isLoading ? (
-        <Loading
-          width='1.2rem'
-          height='1.2rem'
-          className={classes.bookmark__loading}
-        />
+        <Loading className={classes.bookmark__loading} />
       ) : (
         <BookmarkIcon />
       )}
@@ -52,4 +48,3 @@ const BookmarkBtn = ({
   );
 };
 export default BookmarkBtn;
-

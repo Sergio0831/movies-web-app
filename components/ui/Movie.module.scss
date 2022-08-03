@@ -94,11 +94,11 @@
 }
 
 .movie__trending {
-  // width: 47rem;
-  // height: 23rem;
+  width: auto;
   flex: 1 0 24rem;
 
   @include mobile {
+    width: $width-base;
     flex: 1 0 47rem;
   }
 }
