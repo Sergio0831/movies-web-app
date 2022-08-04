@@ -31,7 +31,7 @@ const SignupPage: NextPage = () => {
 
   return (
     <>
-      <SEO title='Registration' />
+      <SEO title='Registration' description='Register new account' />
       <main>
         <AuthSection aria-labelledby='Signup'>
           <Signup />

@@ -1,4 +1,4 @@
-import Login from '../components/authForm/Login';
+import Login from '@/components/authForm/Login';
 import { Loading } from '@/components/icons';
 import { AuthSection } from '@/components/sections';
 import { SEO } from '@/components/ui';
@@ -31,7 +31,7 @@ const LoginPage = () => {
   }
   return (
     <>
-      <SEO title='Login' />
+      <SEO title='Login' description='Login to your account' />
       <main>
         <AuthSection aria-labelledby='Login'>
           <Login />

@@ -16,7 +16,7 @@ const SearchForm = ({ placeholder, search, onSearch }: SearchFormProps) => {
       onSubmit={(e: React.FormEvent) => e.preventDefault()}
     >
       <label htmlFor='search'>
-        <Button type='submit'>
+        <Button type='submit' ariaLabel='Search'>
           <SearchIcon />
         </Button>
         <input
