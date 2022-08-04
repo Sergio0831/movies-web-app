@@ -88,7 +88,11 @@ const Login = () => {
         )}
       </Label>
       <Button type='submit' className='btn-fill body-m'>
-        {isLoading ? <Loading /> : 'Login to your account'}
+        {isLoading ? (
+          <Loading className={classes.loading} />
+        ) : (
+          'Login to your account'
+        )}
       </Button>
       <FormFooter
         link='signup'

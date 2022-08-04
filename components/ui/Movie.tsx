@@ -43,7 +43,7 @@ const Movie = ({ movie, trending }: MovieProps) => {
     } else if (isSuccess && movie.isBookmarked) {
       toast.success(`${movie.title} removed from bookmarks`);
     }
-  }, [isLoading, isSuccess]);
+  }, [isLoading, isSuccess, movie.isBookmarked, movie.title]);
 
   return (
     <article className={movieClasses}>

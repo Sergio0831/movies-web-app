@@ -123,7 +123,11 @@ const Signup = () => {
         className='btn-fill body-m'
         disabled={isLoading ? true : false}
       >
-        {isLoading ? <Loading /> : 'Create an account'}
+        {isLoading ? (
+          <Loading className={classes.loading} />
+        ) : (
+          'Create an account'
+        )}
       </Button>
       <FormFooter
         link='login'

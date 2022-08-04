@@ -1,5 +1,5 @@
-@use "@/styles/variables" as *;
-@use "@/styles/mixins" as *;
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
 
 .form {
   display: $d-grid;
@@ -35,3 +35,22 @@
   }
 }
 
+.loading {
+  width: 2rem;
+  height: 2rem;
+  circle {
+    stroke: $clr-white;
+  }
+}
+
+@include hover() {
+  button:hover {
+    .loading {
+      width: 2rem;
+      height: 2rem;
+      circle {
+        stroke: $clr-dark-blue;
+      }
+    }
+  }
+}
