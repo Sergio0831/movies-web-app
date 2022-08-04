@@ -120,7 +120,7 @@ const Signup = () => {
       </Label>
       <Button
         type='submit'
-        className='btn-fill'
+        className='btn-fill body-m'
         disabled={isLoading ? true : false}
       >
         {isLoading ? <Loading /> : 'Create an account'}

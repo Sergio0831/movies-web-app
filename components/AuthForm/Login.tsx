@@ -87,7 +87,7 @@ const Login = () => {
           <ErrorMessage>{errors?.password.message}</ErrorMessage>
         )}
       </Label>
-      <Button type='submit' className='btn-fill'>
+      <Button type='submit' className='btn-fill body-m'>
         {isLoading ? <Loading /> : 'Login to your account'}
       </Button>
       <FormFooter

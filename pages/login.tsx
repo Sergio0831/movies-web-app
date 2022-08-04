@@ -1,4 +1,4 @@
-import Login from '@/components/authForm/Login';
+import Login from '../components/authForm/Login';
 import { Loading } from '@/components/icons';
 import { AuthSection } from '@/components/sections';
 import { SEO } from '@/components/ui';
