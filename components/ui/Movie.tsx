@@ -15,11 +15,6 @@ type MovieProps = {
 };
 
 const Movie = ({ movie, trending }: MovieProps) => {
-  const movieClasses = clsx({
-    [classes.movie]: true,
-    [classes.movie__trending]: trending
-  });
-
   const movieImageClasses = clsx({
     [classes.movie__image]: true,
     [classes.image__trending]: trending
@@ -46,7 +41,7 @@ const Movie = ({ movie, trending }: MovieProps) => {
   }, [isLoading, isSuccess, movie.isBookmarked, movie.title]);
 
   return (
-    <article className={movieClasses}>
+    <article className={classes.movie}>
       <BookmarkBtn
         bookmarked={movie.isBookmarked}
         onBookmark={handleBookmark}

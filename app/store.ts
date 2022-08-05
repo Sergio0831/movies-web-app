@@ -1,12 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import { movieApi } from './movie.api';
-import { movieReducer } from './movie.slice';
 
 export const store = configureStore({
   reducer: {
-    [movieApi.reducerPath]: movieApi.reducer,
-    movie: movieReducer
+    [movieApi.reducerPath]: movieApi.reducer
   },
   devTools: process.env.NODE_ENV !== 'production',
   middleware: (getDefaultMiddleware) =>

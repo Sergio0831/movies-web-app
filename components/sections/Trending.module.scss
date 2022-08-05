@@ -20,11 +20,20 @@
     width: $width-base;
     padding-top: $padding * 1.6;
     column-gap: $gap * 1.6;
-    transition: transform 1s ease;
 
     @include mobile {
       padding-top: $padding * 2.5;
       column-gap: $gap * 4;
+    }
+  }
+
+  &__slide {
+    width: auto;
+    flex: 1 0 24rem;
+
+    @include mobile {
+      width: $width-base;
+      flex: 1 0 47rem;
     }
   }
 }

@@ -62,19 +62,6 @@
     }
   }
 
-  &__toast {
-    background-color: $clr-greyish-blue !important;
-    color: $clr-white;
-    font-family: inherit;
-    font-size: $fsz-s;
-    font-weight: $fw-light;
-
-    button {
-      color: $clr-white;
-      opacity: 1;
-    }
-  }
-
   &__play {
     z-index: 5;
     align-self: $center;
@@ -93,18 +80,7 @@
   }
 }
 
-.movie__trending {
-  width: auto;
-  flex: 1 0 24rem;
-
-  @include mobile {
-    width: $width-base;
-    flex: 1 0 47rem;
-  }
-}
-
 .image__trending {
-  // width: 47rem;
   height: 14rem;
 
   @include mobile {
