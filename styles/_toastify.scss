@@ -1,0 +1,205 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'breakpoints' as *;
+
+$rt-namespace: 'Toastify';
+
+.#{$rt-namespace} {
+  &__toast-container {
+    z-index: 10;
+    transform: translate3d(0, 0, 1rem);
+    position: fixed;
+    padding: 0;
+    width: 70vw;
+    box-sizing: border-box;
+    color: $clr-white;
+
+    &--top-right {
+      top: 1em;
+      right: 1em;
+      transform: translateX(0);
+    }
+
+    @include mobile {
+      width: 32rem;
+      padding: 4px;
+      margin: 0;
+
+      &--top-right {
+        top: 1em;
+        right: 1em;
+      }
+    }
+  }
+
+  &__toast {
+    position: $p-relative;
+    min-height: 6.3rem;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+    padding: 8px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    max-height: 80rem;
+    overflow: hidden;
+    font-family: inherit;
+    cursor: pointer;
+    direction: ltr;
+    z-index: 0;
+
+    &-theme--light {
+      background: $clr-white;
+      color: $clr-dark-blue;
+    }
+
+    &--rtl {
+      direction: rtl;
+    }
+
+    &-body {
+      margin: auto 0;
+      column-gap: 2rem;
+      font-size: $fsz-xs;
+      flex: 1 1 auto;
+      padding: 6px;
+      display: $d-flex;
+      align-items: $center;
+      & > div:last-child {
+        flex: 1;
+      }
+    }
+
+    &-icon {
+      width: 2rem;
+      fill: $clr-red;
+      flex-shrink: 0;
+      display: $d-flex;
+    }
+  }
+
+  &__progress-bar {
+    &-theme--light {
+      background: $clr-red;
+    }
+  }
+
+  &__progress-bar {
+    @include absolute($bottom: 0, $left: 0);
+    width: $width-base;
+    height: 5px;
+    z-index: 10;
+    opacity: 0.7;
+    transform-origin: left;
+
+    &--animated {
+      animation: #{$rt-namespace}__trackProgress linear 1 forwards;
+    }
+
+    &--controlled {
+      transition: transform 0.2s;
+    }
+
+    &--rtl {
+      right: 0;
+      left: initial;
+      transform-origin: right;
+    }
+  }
+
+  &__close-button {
+    color: #fff;
+    background: transparent;
+    outline: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: $transition;
+    align-self: $start;
+
+    &--light {
+      color: $clr-dark-blue;
+      opacity: 0.3;
+    }
+
+    & > svg {
+      fill: currentColor;
+      height: 1.6rem;
+      width: 1.4rem;
+    }
+
+    &:hover,
+    &:focus {
+      opacity: 1;
+    }
+  }
+
+  &--animate {
+    animation-fill-mode: both;
+    animation-duration: 0.7s;
+  }
+}
+
+@mixin timing-function {
+  animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+@keyframes #{$rt-namespace}__bounceInRight {
+  from,
+  60%,
+  75%,
+  90%,
+  to {
+    @include timing-function;
+  }
+  from {
+    opacity: 0;
+    transform: translate3d(3000px, 0, 0);
+  }
+  60% {
+    opacity: 1;
+    transform: translate3d(-25px, 0, 0);
+  }
+  75% {
+    transform: translate3d(10px, 0, 0);
+  }
+  90% {
+    transform: translate3d(-5px, 0, 0);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes #{$rt-namespace}__bounceOutRight {
+  20% {
+    opacity: 1;
+    transform: translate3d(-2rem, 0, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(200rem, 0, 0);
+  }
+}
+
+@keyframes #{$rt-namespace}__trackProgress {
+  0% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: scaleX(0);
+  }
+}
+
+.#{$rt-namespace}__bounce-enter {
+  &--top-right {
+    animation-name: #{$rt-namespace}__bounceInRight;
+  }
+}
+
+.#{$rt-namespace}__bounce-exit {
+  &--top-right {
+    animation-name: #{$rt-namespace}__bounceOutRight;
+  }
+}
