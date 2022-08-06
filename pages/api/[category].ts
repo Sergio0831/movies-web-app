@@ -17,9 +17,9 @@ export default async function handler(
   });
   const { category } = req.query;
 
-  // if (!user) {
-  //   return res.status(201).json({ message: "Unauthorized" });
-  // }
+  if (!user) {
+    return res.status(201).json({ message: 'Unauthorized' });
+  }
 
   if (req.method === 'GET') {
     try {

@@ -67,14 +67,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     req: context.req
   });
 
-  // if (!session) {
-  //   return {
-  //     redirect: {
-  //       destination: "/login",
-  //       permanent: false
-  //     }
-  //   };
-  // }
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false
+      }
+    };
+  }
 
   return {
     props: { session }

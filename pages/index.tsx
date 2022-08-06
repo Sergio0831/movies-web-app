@@ -1,4 +1,3 @@
-import { Loading } from '@/components/icons';
 import { Container, Grid, Main } from '@/components/layout';
 import { Movies, SectionLoading, Trending } from '@/components/sections';
 import { Movie, SearchForm, SEO } from '@/components/ui';
@@ -76,14 +75,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     req: context.req
   });
 
-  // if (!session) {
-  //   return {
-  //     redirect: {
-  //       destination: "/login",
-  //       permanent: false
-  //     }
-  //   };
-  // }
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false
+      }
+    };
+  }
 
   return {
     props: { session }
