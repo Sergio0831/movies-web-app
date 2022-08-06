@@ -33,7 +33,7 @@ const Description = ({
         {descriptionArray.map((item) => (
           <li key={item}>
             <p className={trending ? 'body-m' : 'body-s'}>
-              {item === rating ? (
+              {item === category ? (
                 <>
                   {category === 'Movie' ? <MovieIcon /> : <TvIcon />}
                   {item}
