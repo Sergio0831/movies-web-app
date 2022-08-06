@@ -9,6 +9,6 @@
   row-gap: $gap * 2.4;
 
   @include mobile {
-    row-gap: $gap * 3.4;
+    row-gap: $gap * 3;
   }
 }

@@ -49,7 +49,7 @@ const Home: NextPage = () => {
                     title={
                       searchQuery.length > 0
                         ? `Found ${movies.length} results for `
-                        : 'Recommendet for you'
+                        : 'Recommended for you'
                     }
                   >
                     <Grid>

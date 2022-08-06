@@ -22,7 +22,7 @@
     column-gap: $gap * 1.6;
 
     @include mobile {
-      padding-top: $padding * 2.5;
+      padding-top: $padding * 2.4;
       column-gap: $gap * 4;
     }
   }
