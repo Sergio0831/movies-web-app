@@ -1,23 +1,23 @@
-import { Container, Main } from "@/components/layout";
-import Grid from "@/components/layout/Grid";
-import { Movies, SectionLoading } from "@/components/sections";
-import { SearchForm, SEO } from "@/components/ui";
-import Movie from "@/components/ui/Movie";
-import { useGetMoviesByCategoryQuery } from "app/movie.api";
-import List from "generics/List";
-import useSearch from "hooks/useSearch";
-import { GetServerSideProps } from "next";
-import { getSession } from "next-auth/react";
-import dynamic from "next/dynamic";
-import { TMovie } from "types/movies";
+import { Container, Main } from '@/components/layout';
+import Grid from '@/components/layout/Grid';
+import { Movies, SectionLoading } from '@/components/sections';
+import { SearchForm, SEO } from '@/components/ui';
+import Movie from '@/components/ui/Movie';
+import { useGetMoviesByCategoryQuery } from 'app/movie.api';
+import List from 'generics/List';
+import useSearch from 'hooks/useSearch';
+import { GetServerSideProps } from 'next';
+import { getSession } from 'next-auth/react';
+import dynamic from 'next/dynamic';
+import { TMovie } from 'types/movies';
 
 const TvSeriesPage = () => {
   const {
     data,
     isSuccess,
     isLoading: loading
-  } = useGetMoviesByCategoryQuery("TV Series");
-  const { onChange, movies, searchQuery, isLoading } = useSearch("TV Series");
+  } = useGetMoviesByCategoryQuery('TV Series');
+  const { onChange, movies, searchQuery, isLoading } = useSearch('TV Series');
 
   return (
     <>
@@ -40,7 +40,7 @@ const TvSeriesPage = () => {
                   title={
                     searchQuery.length > 0
                       ? `Found ${movies.length} results for `
-                      : "TV Series"
+                      : 'TV Series'
                   }
                   aria-labelledby='TV Series'
                 >
@@ -67,14 +67,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     req: context.req
   });
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false
-      }
-    };
-  }
+  // if (!session) {
+  //   return {
+  //     redirect: {
+  //       destination: "/login",
+  //       permanent: false
+  //     }
+  //   };
+  // }
 
   return {
     props: { session }
@@ -82,4 +82,3 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 export default dynamic(() => Promise.resolve(TvSeriesPage), { ssr: false });
-

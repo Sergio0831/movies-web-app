@@ -1,14 +1,14 @@
-import { Loading } from "@/components/icons";
-import { Container, Grid, Main } from "@/components/layout";
-import { Movies, SectionLoading } from "@/components/sections";
-import { Movie, SearchForm, SEO } from "@/components/ui";
-import { useGetBookmarkedMoviesQuery } from "app/movie.api";
-import List from "generics/List";
-import useSearch from "hooks/useSearch";
-import { GetServerSideProps } from "next";
-import { getSession } from "next-auth/react";
-import dynamic from "next/dynamic";
-import { TMovie } from "types/movies";
+import { Loading } from '@/components/icons';
+import { Container, Grid, Main } from '@/components/layout';
+import { Movies, SectionLoading } from '@/components/sections';
+import { Movie, SearchForm, SEO } from '@/components/ui';
+import { useGetBookmarkedMoviesQuery } from 'app/movie.api';
+import List from 'generics/List';
+import useSearch from 'hooks/useSearch';
+import { GetServerSideProps } from 'next';
+import { getSession } from 'next-auth/react';
+import dynamic from 'next/dynamic';
+import { TMovie } from 'types/movies';
 
 const BookmarksPage = () => {
   const { data, isSuccess, isLoading: loading } = useGetBookmarkedMoviesQuery();
@@ -108,14 +108,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     req: context.req
   });
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false
-      }
-    };
-  }
+  // if (!session) {
+  //   return {
+  //     redirect: {
+  //       destination: "/login",
+  //       permanent: false
+  //     }
+  //   };
+  // }
 
   return {
     props: { session }
@@ -123,4 +123,3 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 export default dynamic(() => Promise.resolve(BookmarksPage), { ssr: false });
-

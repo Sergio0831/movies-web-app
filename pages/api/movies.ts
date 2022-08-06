@@ -8,17 +8,17 @@ export default async function handler(
 ) {
   const session = await getSession({ req });
 
-  if (!session) {
-    return res.status(401).json({ message: 'Unauthorized' });
-  }
+  // if (!session) {
+  //   return res.status(401).json({ message: 'Unauthorized' });
+  // }
 
-  const user = await prisma.user.findUnique({
-    where: { email: session.user.email }
-  });
+  // const user = await prisma.user.findUnique({
+  //   where: { email: session.user.email }
+  // });
 
-  if (!user) {
-    return res.status(201).json({ message: 'Unauthorized' });
-  }
+  // if (!user) {
+  //   return res.status(201).json({ message: 'Unauthorized' });
+  // }
 
   if (req.method === 'GET') {
     try {
